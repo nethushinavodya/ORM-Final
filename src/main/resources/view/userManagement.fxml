@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="648.0" prefWidth="872.0" style="-fx-border-radius: 20px;" styleClass="dark-mode-pane" stylesheets="@css/user_management.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserManagementController">
+    <children>
+
+        <!-- User Form (Using GridPane for layout) -->
+        <GridPane alignment="TOP_LEFT" hgap="15" layoutX="65.0" layoutY="100.0" vgap="10">
+            <!-- Row 1 -->
+            <Label text="User ID:" />
+            <TextField fx:id="txtUserID" prefWidth="250.0" promptText="Enter User ID" GridPane.columnIndex="1" />
+
+            <!-- Row 2 -->
+            <Label text="Username:" GridPane.rowIndex="1" />
+            <TextField fx:id="txtUsername" onKeyReleased="#usernameOnKeyReleased" prefWidth="250.0" promptText="Enter Username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <!-- Row 3 -->
+            <Label text="Email:" GridPane.rowIndex="2" />
+            <TextField fx:id="txtEmail" onKeyReleased="#emailOnKeyReleased" prefWidth="250.0" promptText="Enter Email" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+            <!-- Row 4 -->
+            <Label text="Role:" GridPane.rowIndex="5" />
+         <ComboBox fx:id="roleCmb" prefHeight="26.0" prefWidth="249.0" styleClass="combobox" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         <TextField fx:id="passwordtxt" layoutX="105.0" layoutY="128.0" onKeyReleased="#passwordOnKeyReleased" prefWidth="250.0" promptText="Enter passsword" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         <Label layoutX="10.0" layoutY="94.0" text="Password" GridPane.rowIndex="4" />
+
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            </rowConstraints>
+        </GridPane>
+
+        <!-- Buttons for Add, Update, Delete, Search -->
+        <HBox alignment="CENTER" layoutX="65.0" layoutY="370.0" spacing="20">
+            <Button fx:id="btnAddUser" onAction="#addUser" styleClass="dashboard-button" text="Add User" />
+            <Button fx:id="btnUpdateUser" onAction="#updateUser" styleClass="dashboard-button" text="Update User" />
+            <Button fx:id="btnDeleteUser" onAction="#deleteUser" styleClass="dashboard-button" text="Delete User" />
+            <Button fx:id="btnSearchUser" onAction="#searchUser" styleClass="dashboard-button" text="Search User" />
+        </HBox>
+
+        <!-- Table for User Records -->
+        <TableView fx:id="tblUsers" layoutX="64.0" layoutY="442.0" onMouseClicked="#userTblClicked" prefHeight="141.0" prefWidth="654.0" styleClass="table-view">
+            <columns>
+                <TableColumn fx:id="colUserID" prefWidth="100.0" text="User ID" />
+                <TableColumn fx:id="colUsername" prefWidth="200.0" text="Username" />
+                <TableColumn fx:id="colEmail" prefWidth="211.20001220703125" text="Email" />
+                <TableColumn fx:id="colRole" prefWidth="139.199951171875" text="Role" />
+            </columns>
+        </TableView>
+        <Text fill="WHITE" layoutX="291.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Management" wrappingWidth="395.1999267578125">
+            <font>
+                <Font name="System Bold Italic" size="37.0" />
+            </font>
+        </Text>
+      <Button fx:id="backbit" layoutX="705.0" layoutY="36.0" mnemonicParsing="false" onAction="#backOnAction" prefHeight="19.0" prefWidth="111.0" styleClass="back-button" text="Back" />
+      <Hyperlink layoutX="297.0" layoutY="327.0" onAction="#passwordChangeOnAction" prefHeight="24.0" prefWidth="150.0" text="Change Password !!" />
+    </children>
+</AnchorPane>

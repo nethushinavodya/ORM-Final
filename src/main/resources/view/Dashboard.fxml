@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1200" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardController">
+    <stylesheets>
+        <URL value="@css/dashboard.css" />
+    </stylesheets>
+
+    <BorderPane prefHeight="768" prefWidth="1200">
+        <!-- Left Side Navigation Panel -->
+        <left>
+            <VBox prefHeight="768.0" prefWidth="286.0" spacing="5" styleClass="sidebar">
+                <!-- Center Logo -->
+                <VBox alignment="CENTER" spacing="10" styleClass="logo-container">
+                    <padding>
+                        <Insets bottom="20" top="20" />
+                    </padding>
+                    <ImageView fitWidth="100" preserveRatio="true">
+                        <Image url="@../imege/logo.png" />
+                    </ImageView>
+                    <Label styleClass="app-name" text="Senerity Mental Health" />
+                    <Label styleClass="app-subtitle" text="Therapy Center" />
+                </VBox>
+
+                <!-- Navigation Menu -->
+                    <VBox spacing="5" styleClass="menu-container">
+                        <Button fx:id="btnuser" onAction="#handleUserManagement" styleClass="menu-button" text="👉  User Management " />
+                        <Button fx:id="btntherapist" onAction="#handleTherapistManagement" styleClass="menu-button" text="👉  Therapist Management" />
+                        <Button fx:id="btntherapyProgram" onAction="#handleTherapyProgramManagement" styleClass="menu-button" text="👉  Therapy Program Management" />
+                        <Button fx:id="btnpatient" onAction="#handlePatientManagement" styleClass="menu-button" text="👉  Patient Management" />
+                        <Button fx:id="btnsession" onAction="#handleTherapySessionScheduling" styleClass="menu-button" text="👉  Therapy Session Scheduling" />
+                        <Button fx:id="btnpayment" onAction="#handlePaymentManagement" styleClass="menu-button" text="👉  Payment &amp; Invoice Management" />
+                        <Button fx:id="btnreport" onAction="#handleReportingAnalytics" styleClass="menu-button" text="👉  Reporting &amp; Analytics" />
+                        <Button fx:id="btnlogout" onAction="#handleLogout" styleClass="logout-button" text="👉  Logout" />
+                    </VBox>
+            </VBox>
+        </left>
+
+        <!-- Main Content Area -->
+        <center>
+            <VBox styleClass="main-content">
+                <!-- Top Header -->
+                <HBox alignment="CENTER_LEFT" spacing="15" styleClass="header">
+                    <padding>
+                        <Insets bottom="15" left="20" right="20" top="15" />
+                    </padding>
+                    <Label styleClass="page-title" text="Dashboard" />
+                    <HBox HBox.hgrow="ALWAYS" />
+                    <HBox fx:id="role" alignment="CENTER" spacing="10" styleClass="user-info">
+                        <Label fx:id="userNameLabel" text="Admin User" />
+                        <ImageView fitHeight="40" fitWidth="40" styleClass="user-avatar">
+                            <Image url="@images/profile.png" />
+                        </ImageView>
+                    </HBox>
+                </HBox>
+
+                <!-- Dashboard Content -->
+                <StackPane fx:id="contentArea" styleClass="content-area" VBox.vgrow="ALWAYS">
+                    <!-- Default Dashboard View -->
+                    <VBox alignment="CENTER" prefWidth="900.0" spacing="20" styleClass="dashboard-welcome">
+                        <Label styleClass="welcome-header" text="Welcome to Senerity Mental Health Therapy Center">
+                            <font>
+                                <Font size="24" />
+                            </font>
+                        </Label>
+
+                        <!-- Dashboard Statistics -->
+                        <HBox alignment="CENTER" spacing="20" styleClass="stats-container">
+                            <VBox alignment="CENTER" styleClass="stat-card">
+                                <Label fx:id="therapistCountLabel" styleClass="stat-number" text="0" />
+                                <Label styleClass="stat-label" text="Therapists" />
+                            </VBox>
+                            <VBox alignment="CENTER" styleClass="stat-card">
+                                <Label fx:id="patientCountLabel" styleClass="stat-number" text="0" />
+                                <Label styleClass="stat-label" text="Patients" />
+                            </VBox>
+                            <VBox alignment="CENTER" styleClass="stat-card">
+                                <Label fx:id="programCountLabel" styleClass="stat-number" text="0" />
+                                <Label styleClass="stat-label" text="Programs" />
+                            </VBox>
+                            <VBox alignment="CENTER" styleClass="stat-card">
+                                <Label fx:id="sessionCountLabel" styleClass="stat-number" text="0" />
+                                <Label styleClass="stat-label" text="Sessions Today" />
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </StackPane>
+            </VBox>
+        </center>
+    </BorderPane>
+</AnchorPane>
