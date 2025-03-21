@@ -80,7 +80,7 @@ public class DashboardController {
 
 
     public void handleTherapyProgramManagement(ActionEvent actionEvent) throws IOException {
-        AnchorPane userManagementPage = FXMLLoader.load(getClass().getResource("/view/userManagement.fxml"));
+        AnchorPane userManagementPage = FXMLLoader.load(getClass().getResource("/view/TherapyProgram.fxml"));
         contentArea.getChildren().clear();
         contentArea.getChildren().add(userManagementPage);
     }

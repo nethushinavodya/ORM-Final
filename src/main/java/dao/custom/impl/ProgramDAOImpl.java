@@ -39,6 +39,11 @@ public class ProgramDAOImpl implements ProgramDAO {
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        Session session = factoryConfiguration.getSession();
+        session.beginTransaction();
+
+        session.delete(session.get(Program.class, id));
+        session.getTransaction().commit();
+        return true;
     }
 }

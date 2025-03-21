@@ -1,6 +1,7 @@
 package config;
 
 import entity.Patient;
+import entity.Program;
 import entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +13,7 @@ public class FactoryConfiguration {
     private SessionFactory sessionFactory;
 
     private FactoryConfiguration() {
-        Configuration configuration = new Configuration().configure().addAnnotatedClass(User.class).addAnnotatedClass(Patient.class);
+        Configuration configuration = new Configuration().configure().addAnnotatedClass(User.class).addAnnotatedClass(Patient.class).addAnnotatedClass(Program.class);
         sessionFactory = configuration.buildSessionFactory();
     }
 

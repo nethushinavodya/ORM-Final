@@ -5,10 +5,15 @@ import bo.custom.ProgramBO;
 import dto.ProgramDto;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class TherapyProgramController {
@@ -76,10 +81,27 @@ public class TherapyProgramController {
         }
     }
 
-    public void deleteProgram(ActionEvent actionEvent) {
+    public void deleteProgram(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String programId = txtProgramID.getText();
+
+        boolean isDelete = programBO.deleteProgram(programId);
+        if (isDelete){
+            new Alert(Alert.AlertType.INFORMATION,"Delete successful");
+            getAllProgram();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Delete failed");
+        }
     }
 
-    public void backOnAction(ActionEvent actionEvent) {
+    public void backOnAction(ActionEvent actionEvent) throws IOException {
+        AnchorPane rootNode = FXMLLoader.load(getClass().getResource("/view/dashboard.fxml"));
+
+        Scene scene = new Scene(rootNode);
+
+        Stage stage = (Stage) txtProgramID.getScene().getWindow();
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.setTitle("Login Page");
     }
 
     public void programIdOnKeyReleased(KeyEvent keyEvent) {

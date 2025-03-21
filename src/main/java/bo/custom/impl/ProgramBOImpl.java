@@ -33,4 +33,9 @@ public class ProgramBOImpl implements ProgramBO {
     public boolean updateProgram(ProgramDto programDto) throws SQLException, ClassNotFoundException {
         return programDAO.update(new Program(programDto.getProgramId(),programDto.getName(),programDto.getDuration(),programDto.getFee()));
     }
+
+    @Override
+    public boolean deleteProgram(String programId) throws SQLException, ClassNotFoundException {
+        return  programDAO.delete(programId);
+    }
 }
