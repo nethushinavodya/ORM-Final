@@ -28,7 +28,7 @@ public class TherapyProgramController {
 
     ProgramBO programBO = (ProgramBO) BOFactory.getInstance().getBO(BOFactory.BOType.PROGRAM);
 
-    public void initialize() {
+    public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
         getAllProgram();
     }
@@ -60,7 +60,20 @@ public class TherapyProgramController {
             }
     }
 
-    public void updateProgram(ActionEvent actionEvent) {
+    public void updateProgram(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String programId = txtProgramID.getText();
+        String name = txtProgramName.getText();
+        String duration = txtProgramDuration.getText();
+        String fee = txtProgramFee.getText();
+
+        ProgramDto programDto = new ProgramDto(programId,name,duration,fee);
+        boolean isUpdate = programBO.updateProgram(programDto);
+        if (isUpdate){
+            new Alert(Alert.AlertType.INFORMATION,"Update successful");
+            getAllProgram();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Update failed");
+        }
     }
 
     public void deleteProgram(ActionEvent actionEvent) {

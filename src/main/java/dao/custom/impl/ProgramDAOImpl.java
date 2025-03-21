@@ -29,7 +29,12 @@ public class ProgramDAOImpl implements ProgramDAO {
 
     @Override
     public boolean update(Program entity) throws SQLException, ClassNotFoundException {
-        return false;
+        Session session = factoryConfiguration.getSession();
+        session.beginTransaction();
+
+        session.update(entity);
+        session.getTransaction().commit();
+        return true;
     }
 
     @Override

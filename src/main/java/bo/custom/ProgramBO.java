@@ -10,4 +10,6 @@ public interface ProgramBO extends SuperBO {
     ObservableList<ProgramDto> getAllPrograms() throws SQLException, ClassNotFoundException;
 
     boolean addProgram(ProgramDto programDto) throws SQLException, ClassNotFoundException;
+
+    boolean updateProgram(ProgramDto programDto) throws SQLException, ClassNotFoundException;
 }
