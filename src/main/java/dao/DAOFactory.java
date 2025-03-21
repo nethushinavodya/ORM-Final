@@ -2,6 +2,7 @@ package dao;
 
 
 import dao.custom.impl.PatientDAOImpl;
+import dao.custom.impl.ProgramDAOImpl;
 import dao.custom.impl.UserDAOImpl;
 
 public class DAOFactory {
@@ -12,7 +13,7 @@ public class DAOFactory {
         return daoFactory==null?daoFactory=new DAOFactory():daoFactory;
     }
     public enum DAOType {
-        PATIENT, USER
+        PATIENT, PROGRAM, USER
 
     }
     public SuperDAO getDAO(DAOType type) {
@@ -21,6 +22,8 @@ public class DAOFactory {
                 return new UserDAOImpl();
             case PATIENT:
                 return new PatientDAOImpl();
+            case PROGRAM:
+                return new ProgramDAOImpl();
             default:
                 return null;
         }

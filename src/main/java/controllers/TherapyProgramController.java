@@ -1,9 +1,15 @@
 package controllers;
 
+import bo.BOFactory;
+import bo.custom.ProgramBO;
+import dto.ProgramDto;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+
+import java.sql.SQLException;
 
 public class TherapyProgramController {
     public Button backBtn;
@@ -14,7 +20,51 @@ public class TherapyProgramController {
     public Button btnAddProgram;
     public Button btnUpdateProgram;
     public Button btnDeleteProgram;
-    public Button btnSearchProgram;
+    public TableView<ProgramDto> tblPrograms;
+    public TableColumn<?,?> colProgramID;
+    public TableColumn<?,?> colProgramName;
+    public TableColumn<?,?> colDuration;
+    public TableColumn<?,?> colFee;
+
+    ProgramBO programBO = (ProgramBO) BOFactory.getInstance().getBO(BOFactory.BOType.PROGRAM);
+
+    public void initialize() {
+        setCellValueFactory();
+        getAllProgram();
+    }
+
+    private void setCellValueFactory() {
+        colProgramID.setCellValueFactory(new PropertyValueFactory<>("programId"));
+        colProgramName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        colFee.setCellValueFactory(new PropertyValueFactory<>("fee"));
+    }
+
+    public void getAllProgram() throws SQLException, ClassNotFoundException {
+        ObservableList<ProgramDto> programDtos = programBO.getAllPrograms();
+        tblPrograms.setItems(programDtos);
+    }
+    public void addProgram(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String programId = txtProgramID.getText();
+        String name = txtProgramName.getText();
+        String duration = txtProgramDuration.getText();
+        String fee = txtProgramFee.getText();
+
+        ProgramDto programDto = new ProgramDto(programId,name,duration,fee);
+        boolean isSaved = programBO.addProgram(programDto);
+            if (isSaved){
+                new Alert(Alert.AlertType.CONFIRMATION,"Program Saved");
+                getAllProgram();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Program Not Saved");
+            }
+    }
+
+    public void updateProgram(ActionEvent actionEvent) {
+    }
+
+    public void deleteProgram(ActionEvent actionEvent) {
+    }
 
     public void backOnAction(ActionEvent actionEvent) {
     }
@@ -31,15 +81,4 @@ public class TherapyProgramController {
     public void programFeeOnKeyReleased(KeyEvent keyEvent) {
     }
 
-    public void addProgram(ActionEvent actionEvent) {
-    }
-
-    public void updateProgram(ActionEvent actionEvent) {
-    }
-
-    public void deleteProgram(ActionEvent actionEvent) {
-    }
-
-    public void searchProgram(ActionEvent actionEvent) {
-    }
 }

@@ -58,7 +58,6 @@
             <Button fx:id="btnAddProgram" onAction="#addProgram" styleClass="dashboard-button" text="Add Program" />
             <Button fx:id="btnUpdateProgram" onAction="#updateProgram" styleClass="dashboard-button" text="Edit Program" />
             <Button fx:id="btnDeleteProgram" onAction="#deleteProgram" styleClass="dashboard-button" text="Delete Program" />
-            <Button fx:id="btnSearchProgram" onAction="#searchProgram" styleClass="dashboard-button" text="Search Program" />
         </HBox>
 
         <!-- Table for Therapy Programs -->
