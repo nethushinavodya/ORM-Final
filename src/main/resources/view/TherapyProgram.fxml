@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -13,61 +14,68 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="648.0" prefWidth="872.0" styleClass="dark-mode-pane" stylesheets="@css/user_management.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TherapyProgramController">
+<AnchorPane prefHeight="648.0" prefWidth="872.0" styleClass="dark-mode-pane" stylesheets="@css/user_management.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TherapistManagementController">
     <children>
         <!-- Title and Back Button -->
-        <Text fill="WHITE" layoutX="212.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Therapy Program Management" textAlignment="CENTER" wrappingWidth="422.3999389648437">
+        <Text fill="WHITE" layoutX="212.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Therapist Management" textAlignment="CENTER" wrappingWidth="422.3999389648437">
             <font>
                 <Font name="System Bold Italic" size="37.0" />
             </font>
         </Text>
-        <Button fx:id="backBtn" layoutX="697.0" layoutY="48.0" mnemonicParsing="false" onAction="#backOnAction" prefHeight="19.0" prefWidth="111.0" styleClass="back-button" text="Back" />
+        <Button fx:id="backBtn" layoutX="700.0" layoutY="42.0" mnemonicParsing="false" onAction="#backOnAction" prefHeight="19.0" prefWidth="111.0" styleClass="back-button" text="Back" />
 
-        <!-- Therapy Program Form -->
-        <GridPane alignment="TOP_LEFT" hgap="15" layoutX="65.0" layoutY="146.0" vgap="10">
+        <!-- Therapist Form -->
+        <GridPane alignment="TOP_LEFT" hgap="15" layoutX="72.0" layoutY="148.0" prefHeight="174.0" prefWidth="384.0" vgap="10">
             <!-- Row 1 -->
-            <Label text="Program ID:" />
-            <TextField fx:id="txtProgramID" onKeyReleased="#programIdOnKeyReleased" prefWidth="250.0" promptText="Enter Program ID" GridPane.columnIndex="1" />
+            <Label text="Therapist ID:" />
+            <TextField fx:id="txtTherapistID" prefWidth="250.0" promptText="Enter Therapist ID" GridPane.columnIndex="1" />
 
             <!-- Row 2 -->
-            <Label text="Program Name:" GridPane.rowIndex="1" />
-            <TextField fx:id="txtProgramName" onKeyReleased="#programNameOnKeyReleased" prefWidth="250.0" promptText="Enter Program Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Name:" GridPane.rowIndex="1" />
+            <TextField fx:id="txtName" prefWidth="250.0" promptText="Enter Full Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
             <!-- Row 3 -->
-            <Label text="Duration:" GridPane.rowIndex="2" />
-            <TextField fx:id="txtProgramDuration" onKeyReleased="#programDurationOnKeyReleased" prefWidth="250.0" promptText="Enter Duration (weeks)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Specialization:" GridPane.rowIndex="2" />
+            <TextField fx:id="txtSpecialization" prefWidth="250.0" promptText="Enter Specialization" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
             <!-- Row 4 -->
-            <Label text="Fee:" GridPane.rowIndex="3" />
-            <TextField fx:id="txtProgramFee" onKeyReleased="#programFeeOnKeyReleased" prefWidth="250.0" promptText="Enter Fee Amount" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Contact Info:" GridPane.rowIndex="3" />
+            <TextField fx:id="txtContactInfo" prefWidth="250.0" promptText="Enter Contact Number" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
             <columnConstraints>
-                <ColumnConstraints />
-                <ColumnConstraints />
+                <ColumnConstraints minWidth="100.0" />
+                <ColumnConstraints minWidth="250.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints />
-                <RowConstraints />
-                <RowConstraints />
-                <RowConstraints />
+                <RowConstraints maxHeight="35.0" minHeight="30.0" prefHeight="30.400009155273438" />
+                <RowConstraints maxHeight="35.0" minHeight="12.0" prefHeight="35.2" />
+                <RowConstraints maxHeight="61.600006103515625" minHeight="27.999987792968753" prefHeight="35.2" />
+                <RowConstraints maxHeight="35.0" minHeight="30.0" prefHeight="36.79998779296875" />
             </rowConstraints>
         </GridPane>
 
-        <!-- Buttons for Program Management -->
-        <HBox alignment="CENTER" layoutX="65.0" layoutY="347.0" spacing="20">
-            <Button fx:id="btnAddProgram" onAction="#addProgram" styleClass="dashboard-button" text="Add Program" />
-            <Button fx:id="btnUpdateProgram" onAction="#updateProgram" styleClass="dashboard-button" text="Edit Program" />
-            <Button fx:id="btnDeleteProgram" onAction="#deleteProgram" styleClass="dashboard-button" text="Delete Program" />
+           <!-- Buttons for Therapist Management -->
+        <HBox alignment="CENTER" layoutX="68.0" layoutY="363.0" spacing="20">
+            <Button fx:id="btnAddTherapist" onAction="#addTherapist" styleClass="dashboard-button" text="Add Therapist" />
+            <Button fx:id="btnUpdateTherapist" onAction="#updateTherapist" styleClass="dashboard-button" text="Edit Therapist" />
+            <Button fx:id="btnDeleteTherapist" onAction="#deleteTherapist" styleClass="dashboard-button" text="Delete Therapist" />
+            <Button fx:id="btnSearchTherapist" onAction="#searchTherapist" styleClass="dashboard-button" text="Search" />
         </HBox>
 
-        <!-- Table for Therapy Programs -->
-        <TableView fx:id="tblPrograms" layoutX="64.0" layoutY="422.0" prefHeight="150.0" prefWidth="558.0" styleClass="table-view">
+        <!-- Table for Therapists -->
+        <TableView fx:id="tblTherapists" layoutX="65.0" layoutY="430.0" onMouseClicked="#therapistTblClicked" prefHeight="162.0" prefWidth="750.0" styleClass="table-view">
             <columns>
-                <TableColumn fx:id="colProgramID" prefWidth="80.0" text="ID" />
-                <TableColumn fx:id="colProgramName" prefWidth="200.0" text="Program Name" />
-                <TableColumn fx:id="colDuration" prefWidth="159.199951171875" text="Duration" />
-                <TableColumn fx:id="colFee" prefWidth="115.19998168945312" text="Fee" />
+                <TableColumn fx:id="colTherapistID" prefWidth="80.0" text="ID" />
+                <TableColumn fx:id="colName" prefWidth="150.0" text="Name" />
+                <TableColumn fx:id="colSpecialization" prefWidth="150.0" text="Specialization" />
+                <TableColumn fx:id="colContactInfo" prefWidth="150.0" text="Contact Info" />
+                <TableColumn fx:id="colPrograms" prefWidth="120.0" text="Program" />
+                <TableColumn fx:id="colStatus" prefWidth="100.0" text="Status" />
             </columns>
         </TableView>
+
+         <!-- Row 5 -->
+         <Label layoutX="496.0" layoutY="152.0" text="Therapy Program(not compulsory):" />
+         <ComboBox fx:id="therapyProgramCmb" layoutX="504.0" layoutY="194.0" prefWidth="250.0" promptText="Select Program" />
     </children>
 </AnchorPane>

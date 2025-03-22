@@ -45,6 +45,14 @@ public class UserManagementController {
         roleCmb.getItems().addAll("admin", "receptionist");
         setCellValue();
         loadAllData();
+        clear();
+    }
+    public void clear() {
+        txtUserID.clear();
+        txtUsername.clear();
+        txtEmail.clear();
+        passwordtxt.clear();
+        roleCmb.setValue(null);
     }
     public void setCellValue() {
         colUserID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -79,6 +87,7 @@ public class UserManagementController {
             if (isSaved) {
                 loadAllData();
                 new Alert(Alert.AlertType.CONFIRMATION, "User Saved").show();
+                clear();
 
             } else {
                 new Alert(Alert.AlertType.ERROR, "User Not Saved").show();
@@ -118,6 +127,7 @@ public class UserManagementController {
             if (isUpdate){
                 new Alert(Alert.AlertType.INFORMATION,"Update successful");
                 loadAllData();
+                clear();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Update failed");
             }
@@ -133,6 +143,7 @@ public class UserManagementController {
         if (isDelete){
             new Alert(Alert.AlertType.INFORMATION,"Delete successful");
             loadAllData();
+            clear();
         }else {
             new Alert(Alert.AlertType.ERROR,"Delete failed");
         }

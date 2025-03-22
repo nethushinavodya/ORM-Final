@@ -36,8 +36,14 @@ public class TherapyProgramController {
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
         getAllProgram();
+        clear();
     }
-
+    public void clear() {
+        txtProgramID.clear();
+        txtProgramName.clear();
+        txtProgramDuration.clear();
+        txtProgramFee.clear();
+    }
     private void setCellValueFactory() {
         colProgramID.setCellValueFactory(new PropertyValueFactory<>("programId"));
         colProgramName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -60,6 +66,7 @@ public class TherapyProgramController {
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Program Saved");
                 getAllProgram();
+                clear();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Program Not Saved");
             }
@@ -74,8 +81,9 @@ public class TherapyProgramController {
         ProgramDto programDto = new ProgramDto(programId,name,duration,fee);
         boolean isUpdate = programBO.updateProgram(programDto);
         if (isUpdate){
-            new Alert(Alert.AlertType.INFORMATION,"Update successful");
+            new Alert(Alert.AlertType.CONFIRMATION,"Update successful");
             getAllProgram();
+            clear();
         }else {
             new Alert(Alert.AlertType.ERROR,"Update failed");
         }
@@ -86,8 +94,9 @@ public class TherapyProgramController {
 
         boolean isDelete = programBO.deleteProgram(programId);
         if (isDelete){
-            new Alert(Alert.AlertType.INFORMATION,"Delete successful");
+            new Alert(Alert.AlertType.CONFIRMATION,"Delete successful");
             getAllProgram();
+            clear();
         }else {
             new Alert(Alert.AlertType.ERROR,"Delete failed");
         }

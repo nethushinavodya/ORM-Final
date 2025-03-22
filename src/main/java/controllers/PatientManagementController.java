@@ -44,8 +44,16 @@ public class PatientManagementController {
         setcellvaluefactory();
         getallPatient();
         checkrole(userDto);
+        clear();
     }
 
+    public void clear() {
+        txtPatientID.clear();
+        txtPatientName.clear();
+        txtPatientEmail.clear();
+        txtPatientAddress.clear();
+        txtPatientTel.clear();
+    }
     private void checkrole(UserDto userDto) {
         System.out.println(userDto.getRole());
 
@@ -81,6 +89,7 @@ public class PatientManagementController {
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Patient Saved");
                 getallPatient();
+                clear();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Patient Not Saved");
             }
@@ -98,6 +107,7 @@ public class PatientManagementController {
         if (isUpdate){
             new Alert(Alert.AlertType.INFORMATION,"Update successful");
             getallPatient();
+            clear();
         }else {
             new Alert(Alert.AlertType.ERROR,"Update failed");
         }
@@ -110,6 +120,7 @@ public class PatientManagementController {
         if (isDelete){
             new Alert(Alert.AlertType.INFORMATION,"Delete successful");
             getallPatient();
+            clear();
         }else {
             new Alert(Alert.AlertType.ERROR,"Delete failed");
         }
