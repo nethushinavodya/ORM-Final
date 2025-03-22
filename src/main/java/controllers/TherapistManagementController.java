@@ -22,6 +22,8 @@ public class TherapistManagementController {
     public TableColumn colPrograms;
     public TableColumn colStatus;
     public ComboBox therapyProgramCmb;
+    public Button btnClear;
+    public ComboBox statusCmb;
 
     public void backOnAction(ActionEvent actionEvent) {
     }
@@ -39,5 +41,8 @@ public class TherapistManagementController {
     }
 
     public void therapistTblClicked(MouseEvent mouseEvent) {
+    }
+
+    public void clear(ActionEvent actionEvent) {
     }
 }

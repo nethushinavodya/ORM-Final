@@ -16,7 +16,6 @@
 <AnchorPane prefHeight="648.0" prefWidth="872.0" styleClass="dark-mode-pane" stylesheets="@css/user_management.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PatientManagementController">
     <children>
 
-        <!-- Student Form (Using GridPane instead of VBox) -->
         <GridPane alignment="TOP_LEFT" hgap="15" layoutX="65.0" layoutY="100.0" vgap="10">
             <!-- Row 1 -->
             <Label text="ID:" />
