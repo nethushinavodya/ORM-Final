@@ -63,19 +63,18 @@
         </HBox>
 
         <!-- Table for Therapists -->
-        <TableView fx:id="tblTherapists" layoutX="65.0" layoutY="430.0" onMouseClicked="#therapistTblClicked" prefHeight="162.0" prefWidth="750.0" styleClass="table-view">
+        <TableView fx:id="tblTherapists" layoutX="65.0" layoutY="430.0" onMouseClicked="#therapistTblClicked" prefHeight="162.0" prefWidth="627.0" styleClass="table-view">
             <columns>
                 <TableColumn fx:id="colTherapistID" prefWidth="80.0" text="ID" />
                 <TableColumn fx:id="colName" prefWidth="150.0" text="Name" />
                 <TableColumn fx:id="colSpecialization" prefWidth="150.0" text="Specialization" />
                 <TableColumn fx:id="colContactInfo" prefWidth="150.0" text="Contact Info" />
-                <TableColumn fx:id="colPrograms" prefWidth="120.0" text="Program" />
-                <TableColumn fx:id="colStatus" prefWidth="100.0" text="Status" />
+                <TableColumn fx:id="colStatus" prefWidth="93.60002441406255" text="Status" />
             </columns>
         </TableView>
 
         <!-- Row 5 -->
         <Label layoutX="496.0" layoutY="152.0" text="Therapy Program(not compulsory):" />
-        <ComboBox fx:id="therapyProgramCmb" layoutX="504.0" layoutY="194.0" prefWidth="250.0" promptText="Select Program" />
+        <ComboBox fx:id="therapyProgramCmb" layoutX="504.0" layoutY="185.0" prefHeight="26.0" prefWidth="249.0" promptText="Select Program" styleClass="combobox" GridPane.columnIndex="1" GridPane.rowIndex="5" />
     </children>
 </AnchorPane>

@@ -46,4 +46,10 @@ public class ProgramDAOImpl implements ProgramDAO {
         session.getTransaction().commit();
         return true;
     }
+
+    @Override
+    public Program get(String programId) {
+        Session session = factoryConfiguration.getSession();
+        return session.get(Program.class, programId);
+    }
 }

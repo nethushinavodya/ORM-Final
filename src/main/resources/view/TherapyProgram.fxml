@@ -61,13 +61,12 @@
         </HBox>
 
         <!-- Table for Therapy Programs -->
-        <TableView fx:id="tblPrograms" layoutX="64.0" layoutY="437.0" prefHeight="150.0" prefWidth="669.0" styleClass="table-view">
+        <TableView fx:id="tblPrograms" layoutX="64.0" layoutY="437.0" prefHeight="150.0" prefWidth="548.0" styleClass="table-view">
             <columns>
                 <TableColumn fx:id="colProgramID" prefWidth="80.0" text="ID" />
                 <TableColumn fx:id="colProgramName" prefWidth="200.0" text="Program Name" />
-                <TableColumn fx:id="colDuration" prefWidth="120.0" text="Duration" />
-                <TableColumn fx:id="colFee" prefWidth="120.0" text="Fee" />
-                <TableColumn fx:id="colDescription" prefWidth="250.0" text="Description" />
+                <TableColumn fx:id="colDuration" prefWidth="144.79998779296875" text="Duration" />
+                <TableColumn fx:id="colFee" prefWidth="152.00006103515625" text="Fee" />
             </columns>
         </TableView>
     </children>

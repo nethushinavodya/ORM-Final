@@ -1,6 +1,71 @@
 package bo.custom.impl;
 
 import bo.custom.TherapistBO;
+import config.FactoryConfiguration;
+import dao.DAOFactory;
+import dao.custom.ProgramDAO;
+import dao.custom.TherapistDAO;
+import dto.TherapistDTO;
+import entity.Program;
+import entity.Therapist;
+import entity.Therapist_Program;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import org.hibernate.Session;
+
+import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TherapistBOImpl implements TherapistBO {
+    TherapistDAO therapistDAO = (TherapistDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.THERAPIST);
+    ProgramDAO programDAO = (ProgramDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.PROGRAM);
+    @Override
+    public ObservableList<TherapistDTO> getAllTherapists() throws SQLException, ClassNotFoundException {
+        List<TherapistDTO> therapistDTOS = new ArrayList<>();
+        List<Therapist> therapists = therapistDAO.getAll();
+        for (Therapist therapist : therapists) {
+            therapistDTOS.add(new TherapistDTO(therapist.getTherapistId(), therapist.getName(), therapist.getSpecialization(), therapist.getContactNo(), therapist.getStatus()));
+        }
+        return FXCollections.observableArrayList(therapistDTOS);
+    }
+
+    @Override
+    public void addTherapist(TherapistDTO therapistDTO, String programId) throws SQLException, ClassNotFoundException {
+        //transaction
+        Therapist therapist = new Therapist(therapistDTO.getTherapistId(), therapistDTO.getName(), therapistDTO.getSpecialization(), therapistDTO.getContactNo(), therapistDTO.getStatus());
+
+        Session session = FactoryConfiguration.getInstance().getSession();
+        session.beginTransaction();
+
+        try {
+            if (programId == null) {
+                therapistDAO.save(therapist);
+                session.getTransaction().commit();
+            } else {
+                Program program = programDAO.get(programId);
+                Therapist_Program therapist_program = new Therapist_Program(therapist, program);
+                Serializable id = therapistDAO.savetherapist(therapist, session);
+                if (id != null) {
+                    session.save(therapist_program);
+                    session.getTransaction().commit();
+                }
+            }
+        } catch (SQLException e) {
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean deleteTherapist(String id) throws SQLException, ClassNotFoundException {
+        return therapistDAO.delete(id);
+    }
+
+    @Override
+    public boolean updateTherapist(TherapistDTO therapistDTO) throws SQLException, ClassNotFoundException {
+        return therapistDAO.update(new Therapist(therapistDTO.getTherapistId(), therapistDTO.getName(), therapistDTO.getSpecialization(), therapistDTO.getContactNo(), therapistDTO.getStatus()));
+    }
 }
