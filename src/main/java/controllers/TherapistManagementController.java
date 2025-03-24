@@ -80,8 +80,10 @@ public class TherapistManagementController {
 
         if (programId == null){
             therapistDTO = new TherapistDTO(therapistId,name,specialization,contactInfo,"Available");
+            getAllTherapists();
         }else {
             therapistDTO = new TherapistDTO(therapistId,name,specialization,contactInfo,"Not Available");
+            getAllTherapists();
         }
         therapistBO.addTherapist(therapistDTO, programId);
     }

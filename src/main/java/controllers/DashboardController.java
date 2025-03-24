@@ -63,13 +63,14 @@ public class DashboardController {
     public void checkrole(UserDto userDto) throws IOException {
         System.out.println(userDto.getRole()+"checkrole");
         if (userDto.getRole().equals("admin")){
-            btnpayment.setDisable(true);
-            btnreport.setDisable(true);
-            btnsession.setDisable(true);
+            btnuser.setDisable(false);
+            btntherapyProgram.setDisable(false);
+            btntherapist.setDisable(false);
         }else{
-            btnuser.setDisable(true);
-            btntherapyProgram.setDisable(true);
-            btntherapist.setDisable(true);
+            btnuser.setVisible(false);
+            btntherapyProgram.setVisible(false);
+            btntherapist.setDisable(false);
+            btntherapist.setVisible(false);
         }
     }
     public void handleUserManagement(ActionEvent actionEvent) throws IOException {
@@ -98,19 +99,19 @@ public class DashboardController {
     }
 
     public void handleTherapySessionScheduling(ActionEvent actionEvent) throws IOException {
-        AnchorPane userManagementPage = FXMLLoader.load(getClass().getResource("/view/userManagement.fxml"));
+        AnchorPane userManagementPage = FXMLLoader.load(getClass().getResource("/view/TheraphySession.fxml"));
         contentArea.getChildren().clear();
         contentArea.getChildren().add(userManagementPage);
     }
 
     public void handlePaymentManagement(ActionEvent actionEvent) throws IOException {
-        AnchorPane userManagementPage = FXMLLoader.load(getClass().getResource("/view/userManagement.fxml"));
+        AnchorPane userManagementPage = FXMLLoader.load(getClass().getResource("/view/PaymentManagement.fxml"));
         contentArea.getChildren().clear();
         contentArea.getChildren().add(userManagementPage);
     }
 
     public void handleReportingAnalytics(ActionEvent actionEvent) throws IOException {
-        AnchorPane userManagementPage = FXMLLoader.load(getClass().getResource("/view/userManagement.fxml"));
+        AnchorPane userManagementPage = FXMLLoader.load(getClass().getResource("/view/Report.fxml"));
         contentArea.getChildren().clear();
         contentArea.getChildren().add(userManagementPage);
     }
