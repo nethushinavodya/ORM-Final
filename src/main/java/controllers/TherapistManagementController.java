@@ -4,7 +4,7 @@ import bo.BOFactory;
 import bo.custom.ProgramBO;
 import bo.custom.TherapistBO;
 import dto.ProgramDto;
-import dto.TherapistDTO;
+import dto.TherapistDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +25,7 @@ public class TherapistManagementController {
     public Button btnUpdateTherapist;
     public Button btnDeleteTherapist;
     public Button btnSearchTherapist;
-    public TableView<TherapistDTO> tblTherapists;
+    public TableView<TherapistDto> tblTherapists;
     public TableColumn<?,?> colTherapistID;
     public TableColumn<?,?> colSpecialization;
     public TableColumn<?,?> colName;
@@ -57,7 +57,7 @@ public class TherapistManagementController {
         txtContactInfo.clear();
     }
     public void getAllTherapists() throws SQLException, ClassNotFoundException {
-        ObservableList<TherapistDTO> therapistDtos = therapistBO.getAllTherapists();
+        ObservableList<TherapistDto> therapistDtos = therapistBO.getAllTherapists();
         tblTherapists.setItems(therapistDtos);
     }
 
@@ -76,13 +76,13 @@ public class TherapistManagementController {
         String contactInfo = txtContactInfo.getText();
         String programId = therapyProgramCmb.getValue();
 
-        TherapistDTO therapistDTO = new TherapistDTO(therapistId,name,specialization,contactInfo,programId);
+        TherapistDto therapistDTO = new TherapistDto(therapistId,name,specialization,contactInfo,programId);
 
         if (programId == null){
-            therapistDTO = new TherapistDTO(therapistId,name,specialization,contactInfo,"Available");
+            therapistDTO = new TherapistDto(therapistId,name,specialization,contactInfo,"Available");
             getAllTherapists();
         }else {
-            therapistDTO = new TherapistDTO(therapistId,name,specialization,contactInfo,"Not Available");
+            therapistDTO = new TherapistDto(therapistId,name,specialization,contactInfo,"Not Available");
             getAllTherapists();
         }
         therapistBO.addTherapist(therapistDTO, programId);
@@ -109,7 +109,7 @@ public class TherapistManagementController {
         String contactInfo = txtContactInfo.getText();
         String programId = therapyProgramCmb.getValue();
 
-        TherapistDTO therapistDTO = new TherapistDTO(therapistId,name,specialization,contactInfo,programId);
+        TherapistDto therapistDTO = new TherapistDto(therapistId,name,specialization,contactInfo,programId);
         boolean isUpdated = therapistBO.updateTherapist(therapistDTO);
 
         if (isUpdated){

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class TherapistDTO {
+public class TherapistDto {
     private String TherapistId;
     private String name;
     private String specialization;

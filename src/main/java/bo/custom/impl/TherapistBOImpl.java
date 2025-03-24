@@ -5,7 +5,7 @@ import config.FactoryConfiguration;
 import dao.DAOFactory;
 import dao.custom.ProgramDAO;
 import dao.custom.TherapistDAO;
-import dto.TherapistDTO;
+import dto.TherapistDto;
 import entity.Program;
 import entity.Therapist;
 import entity.Therapist_Program;
@@ -22,17 +22,17 @@ public class TherapistBOImpl implements TherapistBO {
     TherapistDAO therapistDAO = (TherapistDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.THERAPIST);
     ProgramDAO programDAO = (ProgramDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.PROGRAM);
     @Override
-    public ObservableList<TherapistDTO> getAllTherapists() throws SQLException, ClassNotFoundException {
-        List<TherapistDTO> therapistDTOS = new ArrayList<>();
+    public ObservableList<TherapistDto> getAllTherapists() throws SQLException, ClassNotFoundException {
+        List<TherapistDto> therapistDtos = new ArrayList<>();
         List<Therapist> therapists = therapistDAO.getAll();
         for (Therapist therapist : therapists) {
-            therapistDTOS.add(new TherapistDTO(therapist.getTherapistId(), therapist.getName(), therapist.getSpecialization(), therapist.getContactNo(), therapist.getStatus()));
+            therapistDtos.add(new TherapistDto(therapist.getTherapistId(), therapist.getName(), therapist.getSpecialization(), therapist.getContactNo(), therapist.getStatus()));
         }
-        return FXCollections.observableArrayList(therapistDTOS);
+        return FXCollections.observableArrayList(therapistDtos);
     }
 
     @Override
-    public void addTherapist(TherapistDTO therapistDTO, String programId) throws SQLException, ClassNotFoundException {
+    public void addTherapist(TherapistDto therapistDTO, String programId) throws SQLException, ClassNotFoundException {
         //transaction
         Therapist therapist = new Therapist(therapistDTO.getTherapistId(), therapistDTO.getName(), therapistDTO.getSpecialization(), therapistDTO.getContactNo(), therapistDTO.getStatus());
 
@@ -65,7 +65,7 @@ public class TherapistBOImpl implements TherapistBO {
     }
 
     @Override
-    public boolean updateTherapist(TherapistDTO therapistDTO) throws SQLException, ClassNotFoundException {
+    public boolean updateTherapist(TherapistDto therapistDTO) throws SQLException, ClassNotFoundException {
         return therapistDAO.update(new Therapist(therapistDTO.getTherapistId(), therapistDTO.getName(), therapistDTO.getSpecialization(), therapistDTO.getContactNo(), therapistDTO.getStatus()));
     }
 }

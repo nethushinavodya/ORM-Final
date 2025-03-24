@@ -1,5 +1,6 @@
 package controllers;
 
+import dto.SessionDto;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -7,21 +8,21 @@ import javafx.scene.input.MouseEvent;
 public class SessionManagementController {
     public Button backBtn;
     public TextField txtSessionID;
-    public ComboBox cmbTherapistID;
-    public ComboBox cmbProgramID;
-    public ComboBox cmbPatientID;
+    public ComboBox<String> cmbTherapistID;
+    public ComboBox<String> cmbProgramID;
+    public ComboBox<String> cmbPatientID;
     public DatePicker dateSession;
     public Button btnAddSession;
     public Button btnUpdateSession;
     public Button btnDeleteSession;
     public Button btnSearchSession;
-    public TableView tblSessions;
-    public TableColumn colSessionID;
-    public TableColumn colTherapistID;
-    public TableColumn colProgramID;
-    public TableColumn colPatientID;
-    public TableColumn colSessionDate;
-    public TableColumn colDuration;
+    public TableView<SessionDto> tblSessions;
+    public TableColumn<?,?> colSessionID;
+    public TableColumn<?,?> colTherapistID;
+    public TableColumn<?,?> colProgramID;
+    public TableColumn<?,?> colPatientID;
+    public TableColumn<?,?> colSessionDate;
+
 
     public void backOnAction(ActionEvent actionEvent) {
     }

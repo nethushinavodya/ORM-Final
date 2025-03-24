@@ -1,9 +1,6 @@
 package bo;
 
-import bo.custom.impl.PatientBOImpl;
-import bo.custom.impl.ProgramBOImpl;
-import bo.custom.impl.TherapistBOImpl;
-import bo.custom.impl.UserBOImpl;
+import bo.custom.impl.*;
 
 public class BOFactory {
     private static BOFactory boFactory;
@@ -12,7 +9,7 @@ public class BOFactory {
         return boFactory==null?boFactory=new BOFactory():boFactory;
     }
     public enum BOType {
-        PATIENT, PROGRAM, USER , THERAPIST
+        PATIENT, PROGRAM, USER , THERAPIST, SESSION
 
     }
     public SuperBO getBO(BOType type) {
@@ -25,6 +22,8 @@ public class BOFactory {
                 return new ProgramBOImpl();
             case THERAPIST:
                 return new TherapistBOImpl();
+            case SESSION:
+                return new SessionBOImpl();
             default:
                 return null;
         }

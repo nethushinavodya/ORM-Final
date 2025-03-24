@@ -29,16 +29,16 @@
          <TextField fx:id="txtSessionID" layoutX="201.1999969482422" layoutY="132.8000030517578" prefWidth="250.0" promptText="Enter Session ID" />
 
         <!-- Row 2 -->
-        <Label layoutX="72.0" layoutY="186.0" text="Program Name:" />
-        <ComboBox fx:id="cmbProgramID" layoutX="201.0" layoutY="177.0" prefWidth="250.0" promptText="Select Program" styleClass="combobox" />
+        <Label layoutX="72.0" layoutY="244.0" text="Program Name:" />
+        <ComboBox fx:id="cmbProgramID" layoutX="201.0" layoutY="237.0" prefWidth="250.0" promptText="Select Program" styleClass="combobox" />
 
         <!-- Row 3 -->
-         <Label layoutX="72.0" layoutY="245.0" text="Therapist ID:" />
-         <ComboBox fx:id="cmbTherapistID" layoutX="201.0" layoutY="236.0" prefWidth="250.0" promptText="Select Therapist" styleClass="combobox" />
+         <Label layoutX="72.0" layoutY="305.0" text="Therapist ID:" />
+         <ComboBox fx:id="cmbTherapistID" layoutX="201.0" layoutY="297.0" prefWidth="250.0" promptText="Select Therapist" styleClass="combobox" />
 
          <!-- Row 4 -->
-         <Label layoutX="72.0" layoutY="303.3999938964844" text="Patient ID:" />
-         <ComboBox fx:id="cmbPatientID" layoutX="201.1999969482422" layoutY="294.6000061035156" prefHeight="32.0" prefWidth="250.0" promptText="Select Patient" styleClass="combobox" />
+         <Label layoutX="72.0" layoutY="188.0" text="Patient ID:" />
+         <ComboBox fx:id="cmbPatientID" layoutX="201.0" layoutY="178.0" prefHeight="32.0" prefWidth="250.0" promptText="Select Patient" styleClass="combobox" />
 
         <!-- Additional Session Info -->
         <GridPane alignment="TOP_LEFT" hgap="15" layoutX="480.0" layoutY="135.0" prefHeight="174.0" prefWidth="330.0" vgap="10">
@@ -68,11 +68,10 @@
         <TableView fx:id="tblSessions" layoutX="68.0" layoutY="430.0" onMouseClicked="#sessionTblClicked" prefHeight="162.0" prefWidth="691.0" styleClass="table-view">
             <columns>
                 <TableColumn fx:id="colSessionID" prefWidth="99.20001220703125" text="Session ID" />
+                <TableColumn fx:id="colPatientID" prefWidth="111.20001220703125" text="Patient ID" />
                 <TableColumn fx:id="colProgramID" prefWidth="144.80001831054688" text="Program name" />
                 <TableColumn fx:id="colTherapistID" prefWidth="106.39996337890625" text="Therapist ID" />
-                <TableColumn fx:id="colPatientID" prefWidth="111.20001220703125" text="Patient ID" />
                 <TableColumn fx:id="colSessionDate" prefWidth="127.20001220703125" text="Session Date" />
-                <TableColumn fx:id="colDuration" prefWidth="99.20000000000005" text="Duration" />
             </columns>
         </TableView>
     </children>
