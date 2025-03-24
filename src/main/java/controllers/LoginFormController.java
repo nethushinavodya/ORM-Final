@@ -32,9 +32,7 @@ public class LoginFormController {
         if (username.isEmpty() || password.isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Please fill in both username and password.").show();
         } else {
-            new Alert(Alert.AlertType.ERROR,"Please Register");
             UserDto userDto1 = userBO.loginUser(username);
-            System.out.println(userDto1.getRole()+" user dto1 value ");
             if (userDto1 == null) {
                 new Alert(Alert.AlertType.INFORMATION, "User not found.").show();
             } else {

@@ -61,7 +61,7 @@
         </HBox>
 
         <!-- Table for Therapy Programs -->
-        <TableView fx:id="tblPrograms" layoutX="64.0" layoutY="437.0" prefHeight="150.0" prefWidth="548.0" styleClass="table-view">
+        <TableView fx:id="tblPrograms" layoutX="64.0" layoutY="437.0" prefHeight="150.0" prefWidth="530.0" styleClass="table-view">
             <columns>
                 <TableColumn fx:id="colProgramID" prefWidth="80.0" text="ID" />
                 <TableColumn fx:id="colProgramName" prefWidth="200.0" text="Program Name" />
