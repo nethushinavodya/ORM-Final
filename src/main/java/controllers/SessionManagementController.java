@@ -63,7 +63,6 @@ public class SessionManagementController {
         setCmbProgramID();
         setCmbTherapistID();
         setCmbPatientID();
-//        getAllSessions();
     }
 
     public void clear() {
@@ -77,10 +76,7 @@ public class SessionManagementController {
         txtProgramName.clear();
         dateSession.setValue(null);
     }
-//
-//    public void getAllSessions() throws SQLException, ClassNotFoundException {
-//        ObservableList<Therapy_SessionDto> therapySessionDtos = sessionBO.getAllSessions();
-//    }
+
     public void setCmbPatientID() throws SQLException, ClassNotFoundException {
         ObservableList<String> observableList = FXCollections.observableArrayList();
 
@@ -155,7 +151,6 @@ public class SessionManagementController {
             boolean isAdded = sessionBO.addSession(therapySessionDto,paymentDTO);
             if (isAdded){
                 new Alert(Alert.AlertType.CONFIRMATION,"Successfully Added");
-//                getAllSessions();
                 clear();
 
             }else {
@@ -174,7 +169,6 @@ public class SessionManagementController {
         boolean isUpdated = sessionBO.updateSession(therapySessionDto);
         if (isUpdated){
             new Alert(Alert.AlertType.CONFIRMATION,"Successfully Updated");
-//            getAllSessions();
             clear();
         }else {
             new Alert(Alert.AlertType.ERROR,"Update Failed");
@@ -186,24 +180,11 @@ public class SessionManagementController {
         boolean isDeleted = sessionBO.deletePatient(patientId);
         if (isDeleted){
             new Alert(Alert.AlertType.CONFIRMATION,"Successfully Deleted");
-//            getAllSessions();
             clear();
         }else {
             new Alert(Alert.AlertType.ERROR,"Delete Failed");
         }
     }
-
-//    public void sessionTblClicked(MouseEvent mouseEvent) {
-//        Therapy_SessionDto therapySessionDto = tblSessions.getSelectionModel().getSelectedItem();
-//
-//        if (therapySessionDto != null) {
-//            txtSessionID.setText(String.valueOf(therapySessionDto.getSessionId()));
-//            cmbPatientID.setValue(therapySessionDto.getPatientId());
-//            cmbProgramID.setValue(therapySessionDto.getProgramId());
-//            cmbTherapistID.setValue(therapySessionDto.getTherapistId());
-//            dateSession.setValue(LocalDate.parse(therapySessionDto.getSessionDate()));
-//        }
-//    }
 
     public void backOnAction(ActionEvent actionEvent) throws IOException {
         AnchorPane rootNode = FXMLLoader.load(getClass().getResource("/view/Dashboard.fxml"));
