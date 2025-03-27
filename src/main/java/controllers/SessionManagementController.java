@@ -144,8 +144,6 @@ public class SessionManagementController {
         String therapistId = cmbTherapistID.getValue();
         String sessionDate = dateSession.getValue().toString();
 
-
-
         Therapy_SessionDto therapySessionDto = new Therapy_SessionDto(sessionId,patientId,programId,therapistId,sessionDate);
 
             boolean isAdded = sessionBO.addSession(therapySessionDto);
