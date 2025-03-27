@@ -11,7 +11,7 @@ public class FactoryConfiguration {
     private SessionFactory sessionFactory;
 
     private FactoryConfiguration() {
-        Configuration configuration = new Configuration().configure().addAnnotatedClass(User.class).addAnnotatedClass(Patient.class).addAnnotatedClass(Program.class).addAnnotatedClass(Therapist.class).addAnnotatedClass(Therapist_Program.class).addAnnotatedClass(Therapy_Session.class);
+        Configuration configuration = new Configuration().configure().addAnnotatedClass(User.class).addAnnotatedClass(Patient.class).addAnnotatedClass(Program.class).addAnnotatedClass(Therapist.class).addAnnotatedClass(Therapist_Program.class).addAnnotatedClass(Therapy_Session.class).addAnnotatedClass(Payment.class);
         sessionFactory = configuration.buildSessionFactory();
     }
 

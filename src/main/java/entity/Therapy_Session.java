@@ -26,4 +26,10 @@ public class Therapy_Session {
     @ManyToOne
     private Therapist therapist;
 
+    public Therapy_Session(String sessionDate, Patient patient, Program program, Therapist therapist) {
+        this.sessionDate = sessionDate;
+        this.patients = patient;
+        this.programs = program;
+        this.therapist = therapist;
+    }
 }

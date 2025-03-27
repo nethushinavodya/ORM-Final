@@ -15,4 +15,11 @@ public class PaymentDTO {
     private String paymentDetails;
     private double fullAmount;
     private double remainingAmount;
+
+    public PaymentDTO(String paymentDetails, double fullAmount, double remainingAmount) {
+        this.paymentDetails = paymentDetails;
+        this.fullAmount = fullAmount;
+        this.remainingAmount = remainingAmount;
+    }
+
 }

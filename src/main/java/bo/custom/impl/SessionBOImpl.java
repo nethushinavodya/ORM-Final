@@ -4,25 +4,20 @@ import bo.custom.SessionBO;
 import config.FactoryConfiguration;
 import dao.DAOFactory;
 import dao.custom.SessionDAO;
+import dto.PaymentDTO;
 import dto.Therapy_SessionDto;
-import entity.Patient;
-import entity.Program;
-import entity.Therapist;
-import entity.Therapy_Session;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import entity.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SessionBOImpl implements SessionBO {
     SessionDAO sessionDAO = (SessionDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SESSION);
 
     @Override
-    public boolean addSession(Therapy_SessionDto therapySessionDto) throws SQLException, ClassNotFoundException {
+    public boolean addSession(Therapy_SessionDto therapySessionDto, PaymentDTO paymentDTO) throws SQLException, ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = null;
         try {
@@ -32,11 +27,20 @@ public class SessionBOImpl implements SessionBO {
             Patient patient = session.get(Patient.class, therapySessionDto.getPatientId());
             Program program = session.get(Program.class, therapySessionDto.getProgramId());
 
-            Therapy_Session therapySession = new Therapy_Session(therapySessionDto.getSessionId(), therapySessionDto.getSessionDate(), patient, program, therapist);
+            Therapy_Session therapySession = new Therapy_Session(therapySessionDto.getSessionDate(), patient, program, therapist);
+            Payment payment = new Payment(paymentDTO.getPaymentDetails(), paymentDTO.getFullAmount(), paymentDTO.getRemainingAmount(), therapySession);
 
-            sessionDAO.save(therapySession);
-            transaction.commit();
-            return true;
+            Serializable save = sessionDAO.save(therapySession);
+            if (save != null) {
+                session.save(payment);
+                transaction.commit();
+                return true;
+            }else {
+                transaction.rollback();
+                session.close();
+                return false;
+            }
+
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -52,11 +56,6 @@ public class SessionBOImpl implements SessionBO {
     @Override
     public String search(String programId) {
         return sessionDAO.search(programId);
-    }
-
-    @Override
-    public boolean deleteSession(long sessionId) throws SQLException, ClassNotFoundException {
-        return sessionDAO.delete(String.valueOf(sessionId));
     }
 
 //    @Override
@@ -80,6 +79,11 @@ public class SessionBOImpl implements SessionBO {
         Program program = session.get(Program.class, therapySessionDto.getProgramId());
         Therapist therapist = session.get(Therapist.class, therapySessionDto.getTherapistId());
 
-        return sessionDAO.update(new Therapy_Session(therapySessionDto.getSessionId(), therapySessionDto.getSessionDate(), patient, program, therapist));
+        return sessionDAO.update(new Therapy_Session( therapySessionDto.getSessionDate(), patient, program, therapist));
+    }
+
+    @Override
+    public boolean deletePatient(String patientId) throws SQLException, ClassNotFoundException {
+        return sessionDAO.delete(patientId);
     }
 }

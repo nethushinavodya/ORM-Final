@@ -11,7 +11,6 @@ import lombok.Setter;
 @Setter
 
 public class Therapy_SessionDto {
-    private long sessionId;
     private String patientId;
     private String programId;
     private String therapistId;

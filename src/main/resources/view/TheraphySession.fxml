@@ -48,7 +48,7 @@
       <Label layoutX="456.0" layoutY="266.6000061035156" prefHeight="26.0" prefWidth="122.0" text="Program Fee :  " />
       <TextField fx:id="txtProgramfee" layoutX="595.0" layoutY="264.0" prefHeight="30.0" prefWidth="230.0" promptText="Program fee" />
       <Label layoutX="555.0" layoutY="163.39999389648438" prefHeight="26.0" prefWidth="134.0" text="Program Detail" underline="true" />
-      <TextField fx:id="txtAmountPaid" layoutX="190.0" layoutY="430.0" prefHeight="30.0" prefWidth="230.0" promptText="Patient name" text="Amount Paid" />
+      <TextField fx:id="txtAmountPaid" layoutX="190.0" layoutY="430.0" prefHeight="30.0" prefWidth="230.0" promptText="Amount Paid" />
       <Label layoutX="61.0" layoutY="371.0" prefHeight="26.0" prefWidth="134.0" text="Payment Detail :" />
       <ComboBox fx:id="cmbPayment" layoutX="189.0" layoutY="360.0" prefHeight="43.0" prefWidth="230.0" promptText="Select Payment" styleClass="combobox" />
       <Label layoutX="148.0" layoutY="318.0" prefHeight="26.0" prefWidth="134.0" text="Payment Details" underline="true" />

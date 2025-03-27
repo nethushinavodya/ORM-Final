@@ -1,11 +1,9 @@
 package controllers;
 
 import bo.BOFactory;
-import bo.custom.PatientBO;
-import bo.custom.ProgramBO;
-import bo.custom.SessionBO;
-import bo.custom.TherapistBO;
+import bo.custom.*;
 import dto.PatientDto;
+import dto.PaymentDTO;
 import dto.ProgramDto;
 import dto.Therapy_SessionDto;
 import javafx.collections.FXCollections;
@@ -53,6 +51,7 @@ public class SessionManagementController {
     ProgramBO programBO = (ProgramBO) BOFactory.getInstance().getBO(BOFactory.BOType.PROGRAM);
     TherapistBO therapistBO = (TherapistBO) BOFactory.getInstance().getBO(BOFactory.BOType.THERAPIST);
     PatientBO patientBO = (PatientBO) BOFactory.getInstance().getBO(BOFactory.BOType.PATIENT);
+    PaymentBO paymentBO = (PaymentBO) BOFactory.getInstance().getBO(BOFactory.BOType.PAYMENT);
 
     public void initialize() throws SQLException, ClassNotFoundException {
         cmbPayment.getItems().addAll("Full Payment", "Installment Payment");
@@ -68,14 +67,14 @@ public class SessionManagementController {
     }
 
     public void clear() {
-        txtPatientName.clear();
-        txtPatientContact.clear();
-        txtProgramfee.clear();
-        txtProgramName.clear();
         cmbTherapistID.getSelectionModel().clearSelection();
         cmbProgramID.getSelectionModel().clearSelection();
         cmbPatientID.getSelectionModel().clearSelection();
         cmbPayment.getSelectionModel().clearSelection();
+        txtPatientName.clear();
+        txtPatientContact.clear();
+        txtProgramfee.clear();
+        txtProgramName.clear();
         dateSession.setValue(null);
     }
 //
@@ -100,18 +99,21 @@ public class SessionManagementController {
             observableList.add(programDto.getProgramId());
         }
         cmbProgramID.setItems(observableList);
-        clear();
     }
     public void setCmbTherapistID() throws SQLException, ClassNotFoundException {
         ObservableList<String> observableList = FXCollections.observableArrayList();
         List<String> therapistIds = therapistBO.getAvailableTherapistIds();
         observableList.addAll(therapistIds);
         cmbTherapistID.setItems(observableList);
-
+        cmbTherapistID.getSelectionModel().clearSelection();
     }
 
     public void loadtherapistId(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String programId = cmbProgramID.getSelectionModel().getSelectedItem();
+
+        if (programId == null) {
+            return;
+        }
 
         ProgramDto program = programBO.searchProgram(programId);
         txtProgramName.setText(program.getName());
@@ -138,15 +140,19 @@ public class SessionManagementController {
     }
 
     public void addSession(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        long sessionId = Long.parseLong(txtSessionID.getText());
         String patientId = cmbPatientID.getValue();
         String programId = cmbProgramID.getValue();
         String therapistId = cmbTherapistID.getValue();
         String sessionDate = dateSession.getValue().toString();
+        String programfee = txtProgramfee.getText();
+        String amountPaid = txtAmountPaid.getText();
+        String paymentdetails = cmbPayment.getValue();
 
-        Therapy_SessionDto therapySessionDto = new Therapy_SessionDto(sessionId,patientId,programId,therapistId,sessionDate);
+        double paidAmount =Double.parseDouble(programfee) - Double.parseDouble(amountPaid);
+        PaymentDTO paymentDTO = new PaymentDTO(paymentdetails,Double.parseDouble(programfee),paidAmount);
+        Therapy_SessionDto therapySessionDto = new Therapy_SessionDto(patientId,programId,therapistId,sessionDate);
 
-            boolean isAdded = sessionBO.addSession(therapySessionDto);
+            boolean isAdded = sessionBO.addSession(therapySessionDto,paymentDTO);
             if (isAdded){
                 new Alert(Alert.AlertType.CONFIRMATION,"Successfully Added");
 //                getAllSessions();
@@ -158,13 +164,12 @@ public class SessionManagementController {
     }
 
     public void updateSession(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        long sessionId = Long.parseLong(txtSessionID.getText());
         String patientId = cmbPatientID.getValue();
         String programId = cmbProgramID.getValue();
         String therapistId = cmbTherapistID.getValue();
         String sessionDate = dateSession.getValue().toString();
 
-        Therapy_SessionDto therapySessionDto = new Therapy_SessionDto(sessionId,patientId,programId,therapistId,sessionDate);
+        Therapy_SessionDto therapySessionDto = new Therapy_SessionDto(patientId,programId,therapistId,sessionDate);
 
         boolean isUpdated = sessionBO.updateSession(therapySessionDto);
         if (isUpdated){
@@ -177,8 +182,8 @@ public class SessionManagementController {
     }
 
     public void deleteSession(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        long sessionId = Long.parseLong(txtSessionID.getText());
-        boolean isDeleted = sessionBO.deleteSession(sessionId);
+        String patientId = cmbPatientID.getValue();
+        boolean isDeleted = sessionBO.deletePatient(patientId);
         if (isDeleted){
             new Alert(Alert.AlertType.CONFIRMATION,"Successfully Deleted");
 //            getAllSessions();
@@ -213,6 +218,10 @@ public class SessionManagementController {
 
     public void patientCmbOnAction(ActionEvent actionEvent) {
         String patientId = cmbPatientID.getSelectionModel().getSelectedItem();
+
+        if (patientId == null) {
+            return;
+        }
 
         PatientDto patient = patientBO.searchPatient(patientId);
 

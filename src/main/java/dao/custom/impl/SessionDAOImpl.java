@@ -45,10 +45,10 @@ public class SessionDAOImpl implements SessionDAO {
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
         Session session = factoryConfiguration.getSession();
         session.beginTransaction();
-        session.delete(session.get(Therapy_Session.class, id));
+        String hql = "DELETE FROM Therapy_Session WHERE patients.id = :patientId";
+        int result = session.createQuery(hql).setParameter("patientId", id).executeUpdate();
         session.getTransaction().commit();
-        return true;
-
+        return result > 0;
     }
 
     @Override
