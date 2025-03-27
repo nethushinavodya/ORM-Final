@@ -10,10 +10,10 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class SessionDto {
-    private String sessionId;
+public class Therapy_SessionDto {
+    private long sessionId;
     private String patientId;
-    private String programName;
+    private String programId;
     private String therapistId;
     private String sessionDate;
 }

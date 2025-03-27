@@ -38,4 +38,15 @@ public class ProgramBOImpl implements ProgramBO {
     public boolean deleteProgram(String programId) throws SQLException, ClassNotFoundException {
         return  programDAO.delete(programId);
     }
+
+    @Override
+    public ProgramDto searchProgram(String programId) {
+        Program program = programDAO.search(programId);
+        if (program == null){
+            return null;
+        }else {
+            return new ProgramDto(program.getProgramId(),program.getName(),program.getDuration(),program.getFee());
+        }
+    }
+
 }

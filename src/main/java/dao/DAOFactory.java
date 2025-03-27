@@ -1,10 +1,7 @@
 package dao;
 
 
-import dao.custom.impl.PatientDAOImpl;
-import dao.custom.impl.ProgramDAOImpl;
-import dao.custom.impl.TherapistDAOImpl;
-import dao.custom.impl.UserDAOImpl;
+import dao.custom.impl.*;
 
 public class DAOFactory {
     private static DAOFactory daoFactory;
@@ -14,7 +11,7 @@ public class DAOFactory {
         return daoFactory==null?daoFactory=new DAOFactory():daoFactory;
     }
     public enum DAOType {
-        PATIENT, PROGRAM, USER , THERAPIST
+        PATIENT, PROGRAM, USER , SESSION, THERAPIST
 
     }
     public SuperDAO getDAO(DAOType type) {
@@ -27,6 +24,8 @@ public class DAOFactory {
                 return new ProgramDAOImpl();
             case THERAPIST:
                 return new TherapistDAOImpl();
+            case SESSION:
+                return new SessionDAOImpl();
             default:
                 return null;
         }

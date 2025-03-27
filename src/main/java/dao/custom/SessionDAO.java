@@ -1,7 +1,14 @@
 package dao.custom;
 
 import dao.CrudDAO;
-import entity.Session;
+import dto.Therapy_SessionDto;
+import entity.Therapy_Session;
 
-public interface SessionDAO extends CrudDAO<Session> {
+import java.util.List;
+
+public interface SessionDAO extends CrudDAO<Therapy_Session> {
+
+    String search(String programId);
+
+//    boolean updateSession(String sessionDate);
 }

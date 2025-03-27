@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -113,6 +114,16 @@ public class TherapyProgramController {
         stage.setTitle("Login Page");
     }
 
+    public void tableOnClick(MouseEvent mouseEvent) {
+        ProgramDto programDto = tblPrograms.getSelectionModel().getSelectedItem();
+
+        if (programDto != null){
+            txtProgramID.setText(programDto.getProgramId());
+            txtProgramName.setText(programDto.getName());
+            txtProgramDuration.setText(programDto.getDuration());
+            txtProgramFee.setText(programDto.getFee());
+        }
+    }
     public void programIdOnKeyReleased(KeyEvent keyEvent) {
     }
 

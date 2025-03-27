@@ -22,4 +22,14 @@ public class Patient {
     private String address;
     private String tel;
 
+    @OneToMany(mappedBy = "patients")
+    private List<Therapy_Session> therapy_sessions;
+
+    public Patient(String id, String name, String email, String address, String tel) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.tel = tel;
+    }
 }

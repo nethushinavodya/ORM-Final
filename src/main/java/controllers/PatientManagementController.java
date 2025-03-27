@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -152,6 +153,18 @@ public class PatientManagementController {
         stage.setTitle("Login Page");
     }
 
+
+    public void patientOnClicked(MouseEvent mouseEvent) {
+        PatientDto patientDto = tblPatients.getSelectionModel().getSelectedItem();
+
+        if (patientDto != null){
+            txtPatientID.setText(patientDto.getId());
+            txtPatientName.setText(patientDto.getName());
+            txtPatientEmail.setText(patientDto.getEmail());
+            txtPatientAddress.setText(patientDto.getAddress());
+            txtPatientTel.setText(patientDto.getTel());
+        }
+    }
     public void PatientIdOnreleasedOnAction(KeyEvent keyEvent) {
     }
 
@@ -166,4 +179,5 @@ public class PatientManagementController {
 
     public void PatientTelOnActionReleased(KeyEvent keyEvent) {
     }
+
 }

@@ -6,6 +6,7 @@ import dto.UserDto;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public interface PatientBO extends SuperBO {
     ObservableList<PatientDto> getAllPatients() throws SQLException, ClassNotFoundException;
@@ -17,4 +18,5 @@ public interface PatientBO extends SuperBO {
     boolean deletePatient(String id) throws SQLException, ClassNotFoundException;
 
     PatientDto searchPatient(String id);
+
 }

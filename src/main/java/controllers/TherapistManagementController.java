@@ -8,10 +8,15 @@ import dto.TherapistDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -109,25 +114,49 @@ public class TherapistManagementController {
         String contactInfo = txtContactInfo.getText();
         String programId = therapyProgramCmb.getValue();
 
-        TherapistDto therapistDTO = new TherapistDto(therapistId,name,specialization,contactInfo,programId);
-        boolean isUpdated = therapistBO.updateTherapist(therapistDTO);
+        TherapistDto therapistDTO = new TherapistDto(therapistId, name, specialization, contactInfo, programId);
 
-        if (isUpdated){
-            new Alert(Alert.AlertType.CONFIRMATION,"Successfully Updated");
+        TherapistBO therapistBO = (TherapistBO) BOFactory.getInstance().getBO(BOFactory.BOType.THERAPIST);
+        boolean isUpdated = therapistBO.updateTherapist(therapistDTO, programId);
+
+        if (isUpdated) {
+            new Alert(Alert.AlertType.CONFIRMATION, "Successfully Updated");
             getAllTherapists();
             clear();
-        }else {
-            new Alert(Alert.AlertType.ERROR,"Update Failed");
+            if (programId != null) {
+                therapistDTO.setStatus("Not Available");
+            } else {
+                therapistDTO.setStatus("Available");
+            }
+            tblTherapists.refresh();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Update Failed");
+        }
+    }
+
+    public void backOnAction(ActionEvent actionEvent) throws IOException {
+        AnchorPane rootNode = FXMLLoader.load(getClass().getResource("/view/Dashboard.fxml"));
+
+        Scene scene = new Scene(rootNode);
+
+        Stage stage = (Stage) txtTherapistID.getScene().getWindow();
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.setTitle("Login Page");
+    }
+
+    public void therapistTblClicked(MouseEvent mouseEvent) {
+        TherapistDto therapist = tblTherapists.getSelectionModel().getSelectedItem();
+
+        if (therapist != null) {
+            txtTherapistID.setText(therapist.getTherapistId());
+            txtName.setText(therapist.getName());
+            txtSpecialization.setText(therapist.getSpecialization());
+            txtContactInfo.setText(therapist.getContactNo());
         }
     }
 
     public void searchTherapist(ActionEvent actionEvent) {
-    }
-
-    public void backOnAction(ActionEvent actionEvent) {
-    }
-
-    public void therapistTblClicked(MouseEvent mouseEvent) {
     }
 
 }

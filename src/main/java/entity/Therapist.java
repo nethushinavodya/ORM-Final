@@ -29,4 +29,15 @@ public class Therapist {
         this.contactNo = contactNo;
         this.status = status;
     }
+    @OneToMany(mappedBy = "therapist")
+    private List<Therapy_Session> therapy_sessions;
+
+    public Therapist(String therapistId, String name, String specialization, String contactNo, String status, List<Therapist_Program> therapist_programs) {
+        this.therapistId = therapistId;
+        this.name = name;
+        this.specialization = specialization;
+        this.contactNo = contactNo;
+        this.status = status;
+        this.therapist_programs = therapist_programs;
+    }
 }

@@ -50,4 +50,5 @@ public class PatientBOImpl implements PatientBO {
             return new PatientDto(patient.getId(),patient.getName(),patient.getEmail(),patient.getAddress(),patient.getTel());
         }
     }
+
 }

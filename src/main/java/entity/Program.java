@@ -32,4 +32,16 @@ public class Program {
         this.duration = duration;
         this.fee = fee;
     }
+
+    @OneToMany(mappedBy = "programs")
+    private List<Therapy_Session> therapy_sessions;
+
+
+    public Program(String programId, String name, String duration, String fee, List<Therapist_Program> therapist_programs) {
+        this.programId = programId;
+        this.name = name;
+        this.duration = duration;
+        this.fee = fee;
+        this.therapist_programs = therapist_programs;
+    }
 }

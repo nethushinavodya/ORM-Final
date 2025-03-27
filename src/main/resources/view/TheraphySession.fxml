@@ -4,75 +4,56 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="648.0" prefWidth="872.0" styleClass="dark-mode-pane" stylesheets="@css/user_management.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SessionManagementController">
     <children>
         <!-- Title and Back Button -->
-        <Text fill="WHITE" layoutX="212.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Session Management" textAlignment="CENTER" wrappingWidth="422.3999389648437">
+        <Text fill="WHITE" layoutX="212.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Session Management" textAlignment="CENTER" wrappingWidth="422.3999389648437">
             <font>
                 <Font name="System Bold Italic" size="37.0" />
             </font>
         </Text>
-        <Button fx:id="backBtn" layoutX="700.0" layoutY="42.0" mnemonicParsing="false" onAction="#backOnAction" prefHeight="19.0" prefWidth="111.0" styleClass="back-button" text="Back" />
-         <!-- Row 1 -->
-         <Label layoutX="72.0" layoutY="134.39999389648438" text="Session ID:" />
-         <TextField fx:id="txtSessionID" layoutX="201.1999969482422" layoutY="132.8000030517578" prefWidth="250.0" promptText="Enter Session ID" />
+        <Button fx:id="backBtn" layoutX="692.0" layoutY="25.0" mnemonicParsing="false" onAction="#backOnAction" prefHeight="30.0" prefWidth="111.0" styleClass="back-button" text="Back" />
 
-        <!-- Row 2 -->
-        <Label layoutX="72.0" layoutY="244.0" text="Program Name:" />
-        <ComboBox fx:id="cmbProgramID" layoutX="201.0" layoutY="237.0" prefWidth="250.0" promptText="Select Program" styleClass="combobox" />
+              <!-- Row 3 -->
+         <Label layoutX="458.0" layoutY="327.0" prefHeight="26.0" prefWidth="114.0" text="Therapist ID:" />
+         <ComboBox fx:id="cmbTherapistID" layoutX="597.0" layoutY="318.0" prefHeight="43.0" prefWidth="230.0" promptText="Select Therapist" styleClass="combobox" />
+         <ComboBox fx:id="cmbPatientID" layoutX="189.0" layoutY="94.0" onAction="#patientCmbOnAction" prefHeight="43.0" prefWidth="230.0" promptText="Select Patient" styleClass="combobox" />
 
-        <!-- Row 3 -->
-         <Label layoutX="72.0" layoutY="305.0" text="Therapist ID:" />
-         <ComboBox fx:id="cmbTherapistID" layoutX="201.0" layoutY="297.0" prefWidth="250.0" promptText="Select Therapist" styleClass="combobox" />
+               <!-- Row 4 -->
+         <Label layoutX="82.0" layoutY="103.80000305175781" text="Patient ID :" />
+      <TextField fx:id="txtPatientName" layoutX="192.0" layoutY="209.0" prefHeight="30.0" prefWidth="230.0" promptText="Patient name" />
+      <TextField fx:id="txtPatientContact" layoutX="192.0" layoutY="262.0" prefHeight="30.0" prefWidth="230.0" promptText="contact" />
+      <Label layoutX="62.0" layoutY="211.0" prefHeight="26.0" prefWidth="134.0" text="Patient Name :" />
+      <Label layoutX="62.0" layoutY="264.6000061035156" text="Contact :" />
+      <Label layoutX="166.0" layoutY="165.39999389648438" prefHeight="26.0" prefWidth="130.0" text="Patient Details" underline="true" />
 
-         <!-- Row 4 -->
-         <Label layoutX="72.0" layoutY="188.0" text="Patient ID:" />
-         <ComboBox fx:id="cmbPatientID" layoutX="201.0" layoutY="178.0" prefHeight="32.0" prefWidth="250.0" promptText="Select Patient" styleClass="combobox" />
-
-        <!-- Additional Session Info -->
-        <GridPane alignment="TOP_LEFT" hgap="15" layoutX="480.0" layoutY="135.0" prefHeight="174.0" prefWidth="330.0" vgap="10">
-
-            <!-- Row 2 -->
-            <Label text="Session Date:" />
-            <DatePicker fx:id="dateSession" prefWidth="210.0" promptText="Select Date" GridPane.columnIndex="1" />
-
-            <columnConstraints>
-                <ColumnConstraints minWidth="100.0" />
-                <ColumnConstraints minWidth="210.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints maxHeight="35.0" minHeight="12.0" prefHeight="35.2" />
-            </rowConstraints>
-        </GridPane>
-
-        <!-- Buttons for Session Management -->
-        <HBox alignment="CENTER" layoutX="72.0" layoutY="366.0" spacing="20">
-            <Button fx:id="btnAddSession" onAction="#addSession" styleClass="dashboard-button" text="Add Session" />
-            <Button fx:id="btnUpdateSession" onAction="#updateSession" styleClass="dashboard-button" text="Edit Session" />
-            <Button fx:id="btnDeleteSession" onAction="#deleteSession" styleClass="dashboard-button" text="Delete Session" />
-            <Button fx:id="btnSearchSession" onAction="#searchSession" styleClass="dashboard-button" text="Search" />
+        <!-- Buttons for Therapy_Session Management -->
+        <HBox alignment="CENTER" layoutX="317.0" layoutY="537.0" spacing="20">
+            <Button fx:id="btnAddSession" onAction="#addSession" styleClass="dashboard-button" text="Book" />
+            <Button fx:id="btnUpdateSession" onAction="#updateSession" styleClass="dashboard-button" text="Reshedule" />
+            <Button fx:id="btnDeleteSession" onAction="#deleteSession" styleClass="dashboard-button" text="Cancle Booking" />
         </HBox>
 
-        <!-- Table for Sessions -->
-        <TableView fx:id="tblSessions" layoutX="68.0" layoutY="430.0" onMouseClicked="#sessionTblClicked" prefHeight="162.0" prefWidth="691.0" styleClass="table-view">
-            <columns>
-                <TableColumn fx:id="colSessionID" prefWidth="99.20001220703125" text="Session ID" />
-                <TableColumn fx:id="colPatientID" prefWidth="111.20001220703125" text="Patient ID" />
-                <TableColumn fx:id="colProgramID" prefWidth="144.80001831054688" text="Program name" />
-                <TableColumn fx:id="colTherapistID" prefWidth="106.39996337890625" text="Therapist ID" />
-                <TableColumn fx:id="colSessionDate" prefWidth="127.20001220703125" text="Session Date" />
-            </columns>
-        </TableView>
+              <!-- Row 2 -->
+        <Label layoutX="457.0" layoutY="101.80000305175781" text="Program ID :" />
+        <ComboBox fx:id="cmbProgramID" layoutX="581.2000122070312" layoutY="93.0" onAction="#loadtherapistId" prefWidth="250.0" promptText="Select Program" styleClass="combobox" />
+      <TextField fx:id="txtProgramName" layoutX="595.0" layoutY="208.0" prefHeight="30.0" prefWidth="230.0" promptText="Program name" />
+      <Label layoutX="456.0" layoutY="210.0" prefHeight="26.0" prefWidth="134.0" text="Program Name :" />
+      <Label layoutX="456.0" layoutY="266.6000061035156" prefHeight="26.0" prefWidth="122.0" text="Program Fee :  " />
+      <TextField fx:id="txtProgramfee" layoutX="595.0" layoutY="264.0" prefHeight="30.0" prefWidth="230.0" promptText="Program fee" />
+      <Label layoutX="555.0" layoutY="163.39999389648438" prefHeight="26.0" prefWidth="134.0" text="Program Detail" underline="true" />
+      <TextField fx:id="txtAmountPaid" layoutX="190.0" layoutY="430.0" prefHeight="30.0" prefWidth="230.0" promptText="Patient name" text="Amount Paid" />
+      <Label layoutX="61.0" layoutY="371.0" prefHeight="26.0" prefWidth="134.0" text="Payment Detail :" />
+      <ComboBox fx:id="cmbPayment" layoutX="189.0" layoutY="360.0" prefHeight="43.0" prefWidth="230.0" promptText="Select Payment" styleClass="combobox" />
+      <Label layoutX="148.0" layoutY="318.0" prefHeight="26.0" prefWidth="134.0" text="Payment Details" underline="true" />
+      <Label layoutX="62.0" layoutY="432.0" prefHeight="26.0" prefWidth="134.0" text="Amount Paid :" />
+      <Label layoutX="460.0" layoutY="388.0" prefHeight="26.0" prefWidth="114.0" text="Session Date :" />
+      <DatePicker fx:id="dateSession" layoutX="597.0" layoutY="387.0" prefHeight="30.0" prefWidth="230.0" />
     </children>
 </AnchorPane>

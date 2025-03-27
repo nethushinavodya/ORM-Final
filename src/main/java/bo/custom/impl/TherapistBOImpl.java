@@ -12,6 +12,7 @@ import entity.Therapist_Program;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -59,13 +60,49 @@ public class TherapistBOImpl implements TherapistBO {
         }
     }
 
+
     @Override
     public boolean deleteTherapist(String id) throws SQLException, ClassNotFoundException {
         return therapistDAO.delete(id);
     }
 
+
     @Override
-    public boolean updateTherapist(TherapistDto therapistDTO) throws SQLException, ClassNotFoundException {
-        return therapistDAO.update(new Therapist(therapistDTO.getTherapistId(), therapistDTO.getName(), therapistDTO.getSpecialization(), therapistDTO.getContactNo(), therapistDTO.getStatus()));
+    public boolean updateTherapist(TherapistDto therapistDTO, String programId) throws SQLException, ClassNotFoundException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Therapist therapist = new Therapist(therapistDTO.getTherapistId(), therapistDTO.getName(), therapistDTO.getSpecialization(), therapistDTO.getContactNo(), therapistDTO.getStatus());
+
+            if (programId == null) {
+                therapistDAO.update(therapist);
+                session.getTransaction().commit();
+                therapistDTO.setStatus("Available");
+            } else {
+                Program program = programDAO.get(programId);
+                Therapist_Program therapist_program = new Therapist_Program(therapist, program);
+                System.out.println("therapist_program = " + therapist_program);
+                Serializable id = therapistDAO.updatetherapist(therapist, session);
+                if (id != null) {
+                    session.update(therapist_program);
+                    session.getTransaction().commit();
+                    therapistDTO.setStatus("Not Available");
+                }
+            }
+            therapistDAO.updateStatus(therapistDTO);
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            return false;
+        } finally {
+            session.close();
+        }
     }
+    @Override
+    public List<String> getAvailableTherapistIds() {
+        return therapistDAO.getAvailableTherapists();
+    }
+
+
 }

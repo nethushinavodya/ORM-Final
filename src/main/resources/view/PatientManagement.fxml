@@ -58,7 +58,7 @@
         </HBox>
 
         <!-- Table for Student Records -->
-        <TableView fx:id="tblPatients" layoutX="64.0" layoutY="403.0" prefHeight="194.0" prefWidth="712.0" styleClass="table-view">
+        <TableView fx:id="tblPatients" layoutX="64.0" layoutY="403.0" onMouseClicked="#patientOnClicked" prefHeight="194.0" prefWidth="712.0" styleClass="table-view">
             <columns>
                 <TableColumn fx:id="colID" prefWidth="77.60000610351562" text="ID" />
                 <TableColumn fx:id="colName" prefWidth="164.0" text="Name" />
