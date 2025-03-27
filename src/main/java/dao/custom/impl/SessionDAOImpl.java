@@ -40,7 +40,7 @@ public class SessionDAOImpl implements SessionDAO {
         return true;
     }
 
-
+//delete
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
         Session session = factoryConfiguration.getSession();
