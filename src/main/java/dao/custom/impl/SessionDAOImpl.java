@@ -2,7 +2,6 @@ package dao.custom.impl;
 
 import config.FactoryConfiguration;
 import dao.custom.SessionDAO;
-import dto.Therapy_SessionDto;
 import entity.Program;
 import entity.Therapist;
 import entity.Therapy_Session;
@@ -70,5 +69,36 @@ public class SessionDAOImpl implements SessionDAO {
             session.close();
         }
     }
+
+    @Override
+    public List<String> getProgramIds(String patientId) {
+        Session session = factoryConfiguration.getSession();
+        session.beginTransaction();
+        String hql = "SELECT programs.programId FROM Therapy_Session WHERE patients.id = :patientId";
+        List<String> programs = session.createQuery(hql, String.class)
+                .setParameter("patientId", patientId)
+                .list();
+        System.out.println(programs);
+        session.getTransaction().commit();
+        session.close();
+
+        return programs;
+
+    }
+
+    @Override
+    public Long searchSessionId(String patiendId, String programId) {
+        Session session = factoryConfiguration.getSession();
+        session.beginTransaction();
+        String hql = "SELECT sessionId FROM Therapy_Session WHERE patients.id = :patiendId AND programs.programId = :programId";
+        Long sessionId = session.createQuery(hql, Long.class)
+                .setParameter("patiendId", patiendId)
+                .setParameter("programId", programId)
+                .getSingleResult();
+        session.getTransaction().commit();
+        session.close();
+        return sessionId;
+    }
+
 
 }

@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.List;
 
 public class SessionBOImpl implements SessionBO {
     SessionDAO sessionDAO = (SessionDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SESSION);
@@ -86,4 +87,15 @@ public class SessionBOImpl implements SessionBO {
     public boolean deletePatient(String patientId) throws SQLException, ClassNotFoundException {
         return sessionDAO.delete(patientId);
     }
+
+    @Override
+    public List<String> getProgramIds(String patientId) {
+        return sessionDAO.getProgramIds(patientId);
+    }
+
+    @Override
+    public Long searchSessionId(String patiendId, String programId) {
+        return Long.valueOf(sessionDAO.searchSessionId(patiendId, programId));
+    }
+
 }

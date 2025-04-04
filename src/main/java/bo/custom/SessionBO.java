@@ -5,6 +5,7 @@ import dto.PaymentDTO;
 import dto.Therapy_SessionDto;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public interface SessionBO extends SuperBO {
 //    ObservableList<Therapy_SessionDto> getAllSessions() throws SQLException, ClassNotFoundException;
@@ -18,6 +19,11 @@ public interface SessionBO extends SuperBO {
     boolean updateSession(Therapy_SessionDto therapySessionDto) throws SQLException, ClassNotFoundException;
 
     boolean deletePatient(String patientId) throws SQLException, ClassNotFoundException;
+
+    List<String> getProgramIds(String patientId);
+
+    Long searchSessionId(String patiendId, String programId);
+
 
 //    boolean updateSession(String sessionDate);
 }

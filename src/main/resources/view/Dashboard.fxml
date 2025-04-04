@@ -70,7 +70,7 @@
                 <StackPane fx:id="contentArea" styleClass="content-area" VBox.vgrow="ALWAYS">
                     <!-- Default Dashboard View -->
                     <VBox alignment="CENTER" prefWidth="900.0" spacing="20" styleClass="dashboard-welcome">
-                        <Label styleClass="welcome-header" text="Welcome to Senerity Mental Health Therapy Center">
+                        <Label prefHeight="162.0" prefWidth="774.0" styleClass="welcome-header" text="Welcome to Senerity Mental Health Therapy Center" textAlignment="CENTER">
                             <font>
                                 <Font size="24" />
                             </font>

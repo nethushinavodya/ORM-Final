@@ -1,59 +1,121 @@
 package controllers;
 
+import bo.BOFactory;
+import bo.custom.PatientBO;
+import bo.custom.PaymentBO;
+import bo.custom.ProgramBO;
+import bo.custom.SessionBO;
+import dto.PatientDto;
+import dto.PaymentDTO;
+import dto.ProgramDto;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class PaymentController {
-    public Button backBtn;
-    public TextField txtPatientID;
-    public ComboBox cmbTherapyProgram;
-    public TextField txtRegistrationDate;
-    public ComboBox cmbPaymentStatus;
+    public TextField txtPaymentID;
+    public TextField txtAmount;
+    public DatePicker date;
+    public TextField txtProgramName;
     public TextField txtProgramFee;
-    public TextField txtPaymentDate;
-    public TextField txtPaymentAmount;
-    public TextField txtRemainingAmount;
-    public Button btnAddPayment;
-    public Button btnUpdatePayment;
-    public Button btnCancelPayment;
-    public TableView tblPatientPayments;
-    public TableColumn colPatientID;
-    public TableColumn colProgramID;
-    public TableColumn colPaymentDate;
-    public TableColumn colProgramFee;
-    public TableColumn colPaymentAmount;
-    public TableColumn colRemainingAmount;
-    public TableColumn colPaymentStatus;
+    public Button backbit;
+    public ComboBox<String> cmbPatient;
+    public Button btnPay;
+    public Button btnClear;
+    public ComboBox<String> cmbProgram;
+    public Button btnreFill;
+    public TextField txtPayingAmount;
 
-    public void backOnAction(ActionEvent actionEvent) {
+    PatientBO patientBO = (PatientBO) BOFactory.getInstance().getBO(BOFactory.BOType.PATIENT);
+    ProgramBO programBO = (ProgramBO) BOFactory.getInstance().getBO(BOFactory.BOType.PROGRAM);
+    PaymentBO paymentBO = (PaymentBO) BOFactory.getInstance().getBO(BOFactory.BOType.PAYMENT);
+    SessionBO sessionBO = (SessionBO) BOFactory.getInstance().getBO(BOFactory.BOType.SESSION);
+
+    public void initialize() throws SQLException, ClassNotFoundException {
+        setPatientId();
     }
 
-    public void patientIdOnKeyReleased(KeyEvent keyEvent) {
+    private void setPatientId() throws SQLException, ClassNotFoundException {
+        ObservableList<String> observableList = FXCollections.observableArrayList();
+        List<PatientDto> patientIds = patientBO.getAllPatients();
+        for (PatientDto patientDto : patientIds) {
+            observableList.add(patientDto.getId());
+        }
+        cmbPatient.setItems(observableList);
     }
 
-    public void programSelectionChanged(ActionEvent actionEvent) {
+    public void patientCmbOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String patientId = cmbPatient.getSelectionModel().getSelectedItem();
+        setProgramId(patientId);
     }
 
-    public void registrationDateOnKeyReleased(KeyEvent keyEvent) {
+    private void setProgramId(String patientId) throws SQLException, ClassNotFoundException {
+        ObservableList<String> observableList = FXCollections.observableArrayList();
+        List<String> programIds = sessionBO.getProgramIds(patientId);
+        observableList.addAll(programIds);
+        cmbProgram.setItems(observableList);
     }
 
-    public void paymentDateOnKeyReleased(KeyEvent keyEvent) {
+    public void programCmbOnAction(ActionEvent actionEvent) {
+        String programId = cmbProgram.getSelectionModel().getSelectedItem();
+        ProgramDto program = programBO.searchProgram(programId);
+        String patiendId = cmbPatient.getSelectionModel().getSelectedItem();
+
+        String sessionId = String.valueOf(sessionBO.searchSessionId(patiendId, programId));
+        System.out.println(sessionId);
+        PaymentDTO payment = paymentBO.searchPayment(sessionId);
+        txtPaymentID.setText(String.valueOf(payment.getPaymentId()));
+        txtAmount.setText(String.valueOf(payment.getRemainingAmount()));
+        txtProgramName.setDisable(true);
+        txtProgramFee.setDisable(true);
+        txtProgramName.setText(program.getName());
+        txtProgramFee.setText(program.getFee());
     }
 
-    public void paymentAmountOnKeyReleased(KeyEvent keyEvent) {
+    public void payAction(ActionEvent actionEvent) {
+        String paymentId = txtPaymentID.getText();
+        String payingAmount = txtPayingAmount.getText();
+
+        boolean isPaid = paymentBO.pay(paymentId, payingAmount);
+        if (isPaid) {
+            new Alert(Alert.AlertType.CONFIRMATION, "Payment successful").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Payment failed").show();
+        }
     }
 
-    public void addPayment(ActionEvent actionEvent) {
+    public void clearAction(ActionEvent actionEvent) {
+        cmbPatient.getSelectionModel().clearSelection();
+        cmbProgram.getSelectionModel().clearSelection();
+        txtPaymentID.clear();
+        txtAmount.clear();
+        date.getEditor().clear();
+        txtProgramName.clear();
+        txtProgramFee.clear();
     }
 
-    public void updatePayment(ActionEvent actionEvent) {
+    public void backOnAction(ActionEvent actionEvent) throws IOException {
+        AnchorPane rootNode = FXMLLoader.load(getClass().getResource("/view/Dashboard.fxml"));
+
+        Scene scene = new Scene(rootNode);
+
+        Stage stage = (Stage) txtPaymentID.getScene().getWindow();
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.setTitle("Login Page");
     }
 
-    public void cancelPayment(ActionEvent actionEvent) {
-    }
-
-    public void tableOnClick(MouseEvent mouseEvent) {
+    public void ReFillAction(ActionEvent actionEvent) {
     }
 }
