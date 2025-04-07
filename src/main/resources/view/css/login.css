@@ -1,9 +1,28 @@
 /* Dark mode styling */
 .dark-mode-pane {
     -fx-background-color: #1e1e1e;
-    -fx-padding: 20px;
 }
 
+/* Split panel styling */
+.image-container {
+    -fx-background-color: #121212;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 0, 0);
+}
+
+.image-overlay-text {
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
+    -fx-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 0);
+}
+
+.login-form-container {
+    -fx-background-color: #1e1e1e;
+    -fx-padding: 30px;
+}
+
+/* Login title styling */
 .login-title {
     -fx-font-weight: bold;
     -fx-font-size: 80px;
@@ -11,6 +30,7 @@
     -fx-font-family: "HoloLens MDL2 Assets";
 }
 
+/* Input fields styling */
 .login-field {
     -fx-background-color: #333333;
     -fx-text-fill: #ffffff;
@@ -18,53 +38,68 @@
     -fx-border-radius: 5px;
     -fx-padding: 7px;
     -fx-font-size: 16px;
+    -fx-transition: -fx-border-color 0.3s ease;
+}
 
+.login-field:focused {
+    -fx-border-color: #00aaff;
+    -fx-border-width: 2px;
 }
 
 .login-field:hover {
-    -fx-translate-x: 3px ease;
     -fx-border-color: #3eff00;
     -fx-cursor: hand;
-
+    -fx-translate-x: 3px ease;
 }
 
+/* Logo styling */
 .logo {
-    -fx-font-weight: bold; /* Makes the text bold */
-    -fx-font-size: 30px; /* Sets the font size */
-    -fx-text-fill: #ff0000; /* Sets the text color */
-    -fx-border-color: #00aaff; /* Sets the border color */
-    -fx-border-width: 2px; /* Sets the border width */
-    -fx-font-style: italic; /* Makes the text italic */
-    -fx-font-family: "Arial"; /* Sets the font family */
-    -fx-padding: 10px; /* Adds padding around the text */
-    -fx-background-color: rgba(255, 255, 255, 0.1); /* Optional: Subtle background */
-    -fx-background-radius: 5px; /* Optional: Rounds the corners of the background */
-    -fx-effect: dropshadow(gaussian, #00aaff, 5, 0.0, 0, 1); /* Optional: Adds a drop shadow effect */
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+    -fx-text-fill: #ff0000;
+    -fx-border-color: #00aaff;
+    -fx-border-width: 2px;
+    -fx-font-style: italic;
+    -fx-font-family: "Arial";
+    -fx-padding: 10px;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, #00aaff, 5, 0.0, 0, 1);
 }
 
 .logo:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.3); /* Changes background on hover */
+    -fx-background-color: rgba(255, 255, 255, 0.3);
 }
 
-
+/* Login button styling */
 .login-button {
     -fx-background-color: #00aaff;
     -fx-text-fill: #ffffff;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
     -fx-font-family: "Arial";
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);
+    -fx-transition: -fx-background-color 0.3s ease;
 }
 
 .login-button:hover {
     -fx-background-color: #005f8f;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 15, 0, 0, 5);
 }
 
+.login-button:pressed {
+    -fx-background-color: #004b73;
+    -fx-translate-y: 1px;
+}
+
+/* Register link styling */
 .register-link {
     -fx-text-fill: #00aaff;
     -fx-font-size: 14px;
     -fx-font-family: "Arial";
+    -fx-transition: -fx-text-fill 0.2s ease;
 }
 
 .register-link:hover {
@@ -72,8 +107,26 @@
     -fx-cursor: hand;
     -fx-text-fill: #ffffff;
 }
+
+/* Footer text styling */
 .footer-text {
-    -fx-font-size: 14px; /* Adjust the font size */
-    -fx-text-fill: #ffffff; /* Set text color */
-    -fx-padding: 10px; /* Add padding */
+    -fx-font-size: 14px;
+    -fx-fill: #888888;
+    -fx-font-family: "Arial";
+}
+
+/* Animation for the login form */
+.login-field, .login-button {
+    -fx-transition: -fx-translate-y 0.3s ease, -fx-opacity 0.3s ease;
+}
+
+/* Responsiveness adjustments */
+@media (max-width: 800px) {
+    .login-title {
+        -fx-font-size: 60px;
+    }
+
+    .login-field, .login-button {
+        -fx-max-width: 300px;
+    }
 }
