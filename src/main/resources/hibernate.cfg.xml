@@ -12,6 +12,6 @@
 
     <!-- DB schema will be updated if needed -->
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.show_sql">false</property>
   </session-factory>
 </hibernate-configuration>

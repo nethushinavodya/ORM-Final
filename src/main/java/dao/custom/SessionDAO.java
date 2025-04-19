@@ -15,6 +15,5 @@ public interface SessionDAO extends CrudDAO<Therapy_Session> {
 
     List<Object[]> getPatientTherapyHistory(String patientId);
 
-
-//    boolean updateSession(String sessionDate);
+//  boolean updateSession(String sessionDate);
 }
