@@ -24,7 +24,6 @@ import java.util.List;
 
 public class SessionManagementController {
     public Button backBtn;
-    public TextField txtSessionID;
     public ComboBox<String> cmbTherapistID;
     public ComboBox<String> cmbProgramID;
     public ComboBox<String> cmbPatientID;
@@ -32,14 +31,6 @@ public class SessionManagementController {
     public Button btnAddSession;
     public Button btnUpdateSession;
     public Button btnDeleteSession;
-    public TableView<Therapy_SessionDto> tblSessions;
-    public TableColumn<?,?> colSessionID;
-    public TableColumn<?,?> colTherapistID;
-    public TableColumn<?,?> colProgramID;
-    public TableColumn<?,?> colPatientID;
-    public TableColumn<?,?> colProgramName;
-    public TableColumn<?,?> colFee;
-    public TableColumn<?,?> colSessionDate;
     public TextField txtPatientName;
     public TextField txtPatientContact;
     public TextField txtProgramName;
@@ -191,7 +182,7 @@ public class SessionManagementController {
 
         Scene scene = new Scene(rootNode);
 
-        Stage stage = (Stage) txtSessionID.getScene().getWindow();
+        Stage stage = (Stage)backBtn.getScene().getWindow();
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.setTitle("Login Page");

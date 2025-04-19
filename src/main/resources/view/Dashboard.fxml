@@ -21,27 +21,27 @@
     <BorderPane prefHeight="768" prefWidth="1200">
         <!-- Left Side Navigation Panel -->
         <left>
-            <VBox prefHeight="768.0" prefWidth="286.0" spacing="5" styleClass="sidebar">
+            <VBox prefHeight="768.0" prefWidth="313.0" spacing="5" styleClass="sidebar">
                 <!-- Center Logo -->
                 <VBox alignment="CENTER" spacing="10" styleClass="logo-container">
                     <padding>
                         <Insets bottom="20" top="20" />
                     </padding>
                     <ImageView fitWidth="100" preserveRatio="true">
-                        <Image url="@../imege/logo.png" />
+                        <Image url="@images/serenity-therapy-logo.png" />
                     </ImageView>
                     <Label styleClass="app-name" text="Senerity Mental Health" />
                     <Label styleClass="app-subtitle" text="Therapy Center" />
                 </VBox>
 
                 <!-- Navigation Menu -->
-                    <VBox spacing="5" styleClass="menu-container">
-                        <Button fx:id="btnuser" onAction="#handleUserManagement" styleClass="menu-button" text="👉  User Management " />
-                        <Button fx:id="btntherapist" onAction="#handleTherapistManagement" styleClass="menu-button" text="👉  Therapist Management" />
-                        <Button fx:id="btntherapyProgram" onAction="#handleTherapyProgramManagement" styleClass="menu-button" text="👉  Therapy Program Management" />
+                    <VBox prefHeight="450.0" prefWidth="303.0" spacing="5" styleClass="menu-container">
                         <Button fx:id="btnpatient" onAction="#handlePatientManagement" styleClass="menu-button" text="👉  Patient Management" />
+                        <Button fx:id="btntherapist" onAction="#handleTherapistManagement" styleClass="menu-button" text="👉  Therapist Management" />
                         <Button fx:id="btnsession" onAction="#handleTherapySessionScheduling" styleClass="menu-button" text="👉  Therapy Session Scheduling" />
+                        <Button fx:id="btntherapyProgram" onAction="#handleTherapyProgramManagement" prefHeight="48.0" prefWidth="290.0" styleClass="menu-button" text="👉  Therapy Program Management" />
                         <Button fx:id="btnpayment" onAction="#handlePaymentManagement" styleClass="menu-button" text="👉  Payment &amp; Invoice Management" />
+                        <Button fx:id="btnuser" onAction="#handleUserManagement" styleClass="menu-button" text="👉  User Management " />
                         <Button fx:id="btnreport" onAction="#handleReportingAnalytics" styleClass="menu-button" text="👉  Reporting &amp; Analytics" />
                         <Button fx:id="btnlogout" onAction="#handleLogout" styleClass="logout-button" text="👉  Logout" />
                     </VBox>

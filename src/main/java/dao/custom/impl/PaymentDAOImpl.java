@@ -59,4 +59,15 @@ public class PaymentDAOImpl implements PaymentDAO {
         return true;
 
     }
+
+    @Override
+    public List<Payment> getAllPatients(String patientId) {
+        Session session = factoryConfiguration.getSession();
+        session.beginTransaction();
+        String hql = "FROM Payment WHERE therapy_session.patients.id = :patientId";
+        List<Payment> payments = session.createQuery(hql, Payment.class).setParameter("patientId", patientId).getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return payments;
+    }
 }

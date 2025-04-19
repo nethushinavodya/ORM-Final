@@ -20,19 +20,19 @@ public class PatientBOImpl implements PatientBO {
         List<PatientDto> patientDtos = new ArrayList<>();
         List<Patient> patients = patientDAO.getAll();
         for (Patient patient : patients){
-            patientDtos.add(new PatientDto(patient.getId(),patient.getName(),patient.getEmail(),patient.getAddress(),patient.getTel()));
+            patientDtos.add(new PatientDto(patient.getId(),patient.getName(),patient.getEmail(),patient.getAddress(),patient.getTel(),patient.getRegisterDate()));
         }
         return FXCollections.observableArrayList(patientDtos);
     }
 
     @Override
     public boolean addPatient(PatientDto patientDto, UserDto userDto) throws SQLException, ClassNotFoundException {
-        return patientDAO.save(new Patient(patientDto.getId(),patientDto.getName(),patientDto.getEmail(),patientDto.getAddress(),patientDto.getTel()));
+        return patientDAO.save(new Patient(patientDto.getId(),patientDto.getName(),patientDto.getEmail(),patientDto.getAddress(),patientDto.getTel(),patientDto.getRegisterDate()));
     }
 
     @Override
     public boolean updatePatient(PatientDto patientDto) throws SQLException, ClassNotFoundException {
-        return patientDAO.update(new Patient(patientDto.getId(),patientDto.getName(),patientDto.getEmail(),patientDto.getAddress(),patientDto.getTel()));
+        return patientDAO.update(new Patient(patientDto.getId(),patientDto.getName(),patientDto.getEmail(),patientDto.getAddress(),patientDto.getTel(),patientDto.getRegisterDate()));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class PatientBOImpl implements PatientBO {
         if (patient == null){
             return null;
         }else {
-            return new PatientDto(patient.getId(),patient.getName(),patient.getEmail(),patient.getAddress(),patient.getTel());
+            return new PatientDto(patient.getId(),patient.getName(),patient.getEmail(),patient.getAddress(),patient.getTel(),patient.getRegisterDate());
         }
     }
 

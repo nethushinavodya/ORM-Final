@@ -7,6 +7,7 @@ import entity.Therapist;
 import entity.Therapy_Session;
 import jakarta.persistence.NoResultException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -39,7 +40,6 @@ public class SessionDAOImpl implements SessionDAO {
         return true;
     }
 
-//delete
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
         Session session = factoryConfiguration.getSession();
@@ -60,9 +60,9 @@ public class SessionDAOImpl implements SessionDAO {
 
             String hql = "SELECT tp.therapist FROM Therapist_Program tp WHERE tp.program = :program";
             return session.createQuery(hql, Therapist.class)
-                                .setParameter("program", program)
-                                .getSingleResult()
-                                .getTherapistId();
+                    .setParameter("program", program)
+                    .getSingleResult()
+                    .getTherapistId();
         } catch (NoResultException e) {
             return null;
         } finally {
@@ -100,5 +100,24 @@ public class SessionDAOImpl implements SessionDAO {
         return sessionId;
     }
 
+    @Override
+    public List<Object[]> getPatientTherapyHistory(String patientId) {
+        Session session = factoryConfiguration.getSession();
+        try {
+            String hql = "SELECT p.programId, p.name, t.name, p.fee, pay.remainingAmount, ts.sessionDate " +
+                    "FROM Therapy_Session ts " +
+                    "JOIN ts.programs p " +
+                    "JOIN ts.therapist t " +
+                    "LEFT JOIN Payment pay ON pay.therapy_session = ts " +
+                    "WHERE ts.patients.id = :patientId " +
+                    "ORDER BY ts.sessionDate DESC";
 
+            Query<Object[]> query = session.createQuery(hql, Object[].class);
+            query.setParameter("patientId", patientId);
+
+            return query.getResultList();
+        } finally {
+            session.close();
+        }
+    }
 }

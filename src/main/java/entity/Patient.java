@@ -21,15 +21,17 @@ public class Patient {
     private String email;
     private String address;
     private String tel;
+    private String registerDate;
 
     @OneToMany(mappedBy = "patients")
     private List<Therapy_Session> therapy_sessions;
 
-    public Patient(String id, String name, String email, String address, String tel) {
+    public Patient(String id, String name, String email, String address, String tel, String registerDate) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.address = address;
         this.tel = tel;
+        this.registerDate = registerDate;
     }
 }

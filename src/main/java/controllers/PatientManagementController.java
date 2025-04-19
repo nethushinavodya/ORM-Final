@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class PatientManagementController {
 
@@ -35,9 +36,12 @@ public class PatientManagementController {
     public TableColumn<?,?> colEmail;
     public TableColumn<?,?> colAddress;
     public TableColumn<?,?> colTel;
+    public TableColumn<?,?> colDate;
+    public DatePicker regDate;
     public Button backbit;
 
     static UserDto userDto;
+    public Button btnPatientHistory;
     PatientBO patientBO = (PatientBO) BOFactory.getInstance().getBO(BOFactory.BOType.PATIENT);
 
     public void initialize() throws SQLException, ClassNotFoundException {
@@ -71,6 +75,7 @@ public class PatientManagementController {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colTel.setCellValueFactory(new PropertyValueFactory<>("tel"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("registerDate"));
     }
     public void getallPatient() throws SQLException, ClassNotFoundException {
         ObservableList<PatientDto> patientDtos = patientBO.getAllPatients();
@@ -83,9 +88,10 @@ public class PatientManagementController {
         String email = txtPatientEmail.getText();
         String address = txtPatientAddress.getText();
         String tel = txtPatientTel.getText();
+        String registerDate = regDate.getValue().toString();
 
 
-            PatientDto patientDto = new PatientDto(id,name,email,address,tel);
+            PatientDto patientDto = new PatientDto(id,name,email,address,tel,registerDate);
             boolean isSaved = patientBO.addPatient(patientDto , userDto);
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Patient Saved");
@@ -102,8 +108,9 @@ public class PatientManagementController {
         String email = txtPatientEmail.getText();
         String address = txtPatientAddress.getText();
         String tel = txtPatientTel.getText();
+        String registerDate = regDate.getValue().toString();
 
-        PatientDto patientDto = new PatientDto(id,name,email,address,tel);
+        PatientDto patientDto = new PatientDto(id,name,email,address,tel,registerDate);
         boolean isUpdate = patientBO.updatePatient(patientDto);
         if (isUpdate){
             new Alert(Alert.AlertType.INFORMATION,"Update successful");
@@ -137,6 +144,7 @@ public class PatientManagementController {
             txtPatientEmail.setText(patientDto.getEmail());
             txtPatientAddress.setText(patientDto.getAddress());
             txtPatientTel.setText(patientDto.getTel());
+            regDate.setValue(LocalDate.parse(patientDto.getRegisterDate()));
         }else {
             new Alert(Alert.AlertType.ERROR,"Patient not found");
         }
@@ -163,8 +171,18 @@ public class PatientManagementController {
             txtPatientEmail.setText(patientDto.getEmail());
             txtPatientAddress.setText(patientDto.getAddress());
             txtPatientTel.setText(patientDto.getTel());
+            regDate.setValue(LocalDate.parse(patientDto.getRegisterDate()));
         }
     }
+
+
+    public void patientHistory(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/patientHistory.fxml"))));
+        stage.setTitle("Patient History Page");
+        stage.show();
+    }
+
     public void PatientIdOnreleasedOnAction(KeyEvent keyEvent) {
     }
 

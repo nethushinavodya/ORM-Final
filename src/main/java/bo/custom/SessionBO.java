@@ -2,6 +2,7 @@ package bo.custom;
 
 import bo.SuperBO;
 import dto.PaymentDTO;
+import dto.TherapyProgramHistoryDTO;
 import dto.Therapy_SessionDto;
 
 import java.sql.SQLException;
@@ -23,6 +24,8 @@ public interface SessionBO extends SuperBO {
     List<String> getProgramIds(String patientId);
 
     Long searchSessionId(String patiendId, String programId);
+
+    List<TherapyProgramHistoryDTO> getPatientTherapyHistory(String patientId);
 
 
 //    boolean updateSession(String sessionDate);

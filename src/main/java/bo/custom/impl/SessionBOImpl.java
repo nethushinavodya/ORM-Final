@@ -5,6 +5,7 @@ import config.FactoryConfiguration;
 import dao.DAOFactory;
 import dao.custom.SessionDAO;
 import dto.PaymentDTO;
+import dto.TherapyProgramHistoryDTO;
 import dto.Therapy_SessionDto;
 import entity.*;
 import org.hibernate.Session;
@@ -12,6 +13,7 @@ import org.hibernate.Transaction;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SessionBOImpl implements SessionBO {
@@ -98,4 +100,23 @@ public class SessionBOImpl implements SessionBO {
         return Long.valueOf(sessionDAO.searchSessionId(patiendId, programId));
     }
 
+    @Override
+    public List<TherapyProgramHistoryDTO> getPatientTherapyHistory(String patientId) {
+        List<Object[]> results = sessionDAO.getPatientTherapyHistory(patientId);
+        List<TherapyProgramHistoryDTO> historyDTOs = new ArrayList<>();
+
+        for (Object[] row : results) {
+            TherapyProgramHistoryDTO dto = new TherapyProgramHistoryDTO();
+            dto.setProgramId((String) row[0]);          // Program ID
+            dto.setProgramName((String) row[1]);        // Program Name
+            dto.setTherapistName((String) row[2]);      // Therapist Name
+            dto.setFee((String) row[3]);                // Fee
+            dto.setRemainingAmount((Double) row[4]);    // Remaining Amount
+            dto.setPaymentDate((String) row[5]);        // Payment Date
+
+            historyDTOs.add(dto);
+        }
+
+        return historyDTOs;
+    }
 }
