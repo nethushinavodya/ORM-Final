@@ -77,10 +77,10 @@ public class UserManagementController {
         String email = txtEmail.getText();
         String password = passwordtxt.getText();
         String role = roleCmb.getValue();
-//
-//        if (!isValid()) {
-//            new Alert(Alert.AlertType.ERROR, "Please input valid data").show();
-//        } else {
+
+        if (!isValid()) {
+            new Alert(Alert.AlertType.ERROR, "Please input valid data").show();
+        } else {
             String bcryptedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
             UserDto userDto = new UserDto(username, email, bcryptedPassword, role);
             boolean isSaved = userBO.addUser(userDto);
@@ -88,28 +88,10 @@ public class UserManagementController {
                 loadAllData();
                 new Alert(Alert.AlertType.CONFIRMATION, "User Saved").show();
                 clear();
-
             } else {
                 new Alert(Alert.AlertType.ERROR, "User Not Saved").show();
             }
-    }
-    public boolean isValid(){
-        String id = txtUserID.getText();
-        String username = txtUsername.getText();
-        String email = txtEmail.getText();
-        String password = passwordtxt.getText();
-        String role = (String) roleCmb.getValue();
-
-        if (
-                username.matches("[a-zA-Z0-9]{4,}") &&
-                        email.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$") &&
-                        password.matches("[a-zA-Z0-9]{6,}")
-        ) {
-            return true;
-        } else {
-            return false;
         }
-
     }
 
     public void updateUser(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
@@ -193,13 +175,46 @@ public class UserManagementController {
             new Alert(Alert.AlertType.ERROR,"Patient not found");
         }
     }
+    public boolean isValid(){
+        String id = txtUserID.getText();
+        String username = txtUsername.getText();
+        String email = txtEmail.getText();
+        String password = passwordtxt.getText();
+        String role = (String) roleCmb.getValue();
+
+        if (
+                username.matches("[a-zA-Z0-9]{4,}") &&
+                        email.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$") &&
+                        password.matches("[a-zA-Z0-9]{6,}")
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
     public void usernameOnKeyReleased(KeyEvent keyEvent) {
+        if (txtUsername.getText().matches("[a-zA-Z0-9]{4,}")) {
+            txtUsername.setStyle("-fx-border-color: green; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        }else {
+            txtUsername.setStyle("-fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        }
     }
 
     public void emailOnKeyReleased(KeyEvent keyEvent) {
+        if (txtEmail.getText().matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")) {
+            txtEmail.setStyle("-fx-border-color: green; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        }else {
+            txtEmail.setStyle("-fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        }
     }
 
     public void passwordOnKeyReleased(KeyEvent keyEvent) {
+        if (passwordtxt.getText().matches("[a-zA-Z0-9]{6,}")) {
+            passwordtxt.setStyle("-fx-border-color: green; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        }else {
+            passwordtxt.setStyle("-fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        }
     }
 }
