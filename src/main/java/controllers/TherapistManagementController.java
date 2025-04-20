@@ -82,6 +82,7 @@ public class TherapistManagementController {
         String contactInfo = txtContactInfo.getText();
         String programId = therapyProgramCmb.getValue();
 
+        if (isValid()){
         TherapistDto therapistDTO = new TherapistDto(therapistId,name,specialization,contactInfo,programId);
 
         if (programId == null){
@@ -92,6 +93,8 @@ public class TherapistManagementController {
             getAllTherapists();
         }
         therapistBO.addTherapist(therapistDTO, programId);
+        getAllTherapists();
+        }
     }
 
     public void deleteTherapist(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
@@ -160,7 +163,20 @@ public class TherapistManagementController {
     public void searchTherapist(ActionEvent actionEvent) {
     }
 
+    public boolean isValid(){
+        String contactInfo = txtContactInfo.getText();
 
+        if (contactInfo.matches("^(?:7|0|(?:\\+94))[0-9]{9,10}$")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public void therapistContactOnKeyReleased(KeyEvent keyEvent) {
+        if (txtContactInfo.getText().matches("^(?:7|0|(?:\\+94))[0-9]{9,10}$")) {
+            txtContactInfo.setStyle("-fx-border-color: green; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        } else {
+            txtContactInfo.setStyle("-fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        }
     }
 }
