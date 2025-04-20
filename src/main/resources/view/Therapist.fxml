@@ -40,7 +40,7 @@
 
             <!-- Row 4 -->
             <Label text="Contact Info:" GridPane.rowIndex="3" />
-            <TextField fx:id="txtContactInfo" prefWidth="250.0" promptText="Enter Contact Number" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtContactInfo" onKeyReleased="#therapistContactOnKeyReleased" prefWidth="250.0" promptText="Enter Contact Number" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
             <columnConstraints>
                 <ColumnConstraints minWidth="100.0" />

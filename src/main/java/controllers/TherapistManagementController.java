@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -159,4 +160,7 @@ public class TherapistManagementController {
     public void searchTherapist(ActionEvent actionEvent) {
     }
 
+
+    public void therapistContactOnKeyReleased(KeyEvent keyEvent) {
+    }
 }

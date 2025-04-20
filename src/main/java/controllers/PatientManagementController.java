@@ -90,7 +90,7 @@ public class PatientManagementController {
         String tel = txtPatientTel.getText();
         String registerDate = regDate.getValue().toString();
 
-
+        if (isValid()) {
             PatientDto patientDto = new PatientDto(id,name,email,address,tel,registerDate);
             boolean isSaved = patientBO.addPatient(patientDto , userDto);
             if (isSaved){
@@ -100,6 +100,9 @@ public class PatientManagementController {
             }else {
                 new Alert(Alert.AlertType.ERROR,"Patient Not Saved");
             }
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Please input valid data");
+        }
     }
 
     public void updatePatient(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
@@ -110,14 +113,18 @@ public class PatientManagementController {
         String tel = txtPatientTel.getText();
         String registerDate = regDate.getValue().toString();
 
-        PatientDto patientDto = new PatientDto(id,name,email,address,tel,registerDate);
-        boolean isUpdate = patientBO.updatePatient(patientDto);
-        if (isUpdate){
-            new Alert(Alert.AlertType.INFORMATION,"Update successful");
-            getallPatient();
-            clear();
+        if (isValid()){
+            PatientDto patientDto = new PatientDto(id,name,email,address,tel,registerDate);
+            boolean isUpdate = patientBO.updatePatient(patientDto);
+            if (isUpdate){
+                new Alert(Alert.AlertType.INFORMATION,"Update successful");
+                getallPatient();
+                clear();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Update failed");
+            }
         }else {
-            new Alert(Alert.AlertType.ERROR,"Update failed");
+            new Alert(Alert.AlertType.ERROR,"Please input valid data");
         }
     }
 
@@ -183,6 +190,19 @@ public class PatientManagementController {
         stage.show();
     }
 
+    public boolean isValid(){
+        String email = txtPatientEmail.getText();
+        String tel = txtPatientTel.getText();
+
+        if (
+                email.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$") &&
+                        tel.matches("^(?:7|0|(?:\\+94))[0-9]{9,10}$")
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public void PatientIdOnreleasedOnAction(KeyEvent keyEvent) {
     }
 
@@ -190,12 +210,22 @@ public class PatientManagementController {
     }
 
     public void PatientEmailOnActionReleased(KeyEvent keyEvent) {
+        if (txtPatientEmail.getText().matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")) {
+            txtPatientEmail.setStyle("-fx-border-color: green; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        }else {
+            txtPatientEmail.setStyle("-fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        }
     }
 
     public void PatientAddressOnActionReleased(KeyEvent keyEvent) {
     }
 
     public void PatientTelOnActionReleased(KeyEvent keyEvent) {
+        if (txtPatientTel.getText().matches("^(?:7|0|(?:\\+94))[0-9]{9,10}$")) {
+            txtPatientTel.setStyle("-fx-border-color: green; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        } else {
+            txtPatientTel.setStyle("-fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px;");
+        }
     }
 
 }
