@@ -120,4 +120,18 @@ public class SessionDAOImpl implements SessionDAO {
             session.close();
         }
     }
+
+    @Override
+    public List<Therapy_Session> getAllPatients() {
+        Session session = factoryConfiguration.getSession();
+        String hql = "FROM Therapy_Session";
+        return session.createQuery(hql, Therapy_Session.class).list();
+    }
+
+    @Override
+    public List<String> getPatientIdsFromTherapySessions() {
+        Session session = factoryConfiguration.getSession();
+        String hql = "SELECT DISTINCT patients.id FROM Therapy_Session";
+        return session.createQuery(hql, String.class).list();
+    }
 }

@@ -4,6 +4,7 @@ import bo.custom.SessionBO;
 import config.FactoryConfiguration;
 import dao.DAOFactory;
 import dao.custom.SessionDAO;
+import dto.PatientDto;
 import dto.PaymentDTO;
 import dto.TherapyProgramHistoryDTO;
 import dto.Therapy_SessionDto;
@@ -119,4 +120,10 @@ public class SessionBOImpl implements SessionBO {
 
         return historyDTOs;
     }
+
+    @Override
+    public List<String> getPatientIdsFromTherapySessions() {
+        return sessionDAO.getPatientIdsFromTherapySessions();
+    }
+
 }

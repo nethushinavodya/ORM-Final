@@ -34,7 +34,6 @@ public class PaymentController {
     public Button btnPay;
     public Button btnClear;
     public ComboBox<String> cmbProgram;
-    public Button btnreFill;
     public TextField txtPayingAmount;
 
     PatientBO patientBO = (PatientBO) BOFactory.getInstance().getBO(BOFactory.BOType.PATIENT);
@@ -46,12 +45,18 @@ public class PaymentController {
         setPatientId();
     }
 
+    public void clear(){
+        txtPaymentID.clear();
+        txtAmount.clear();
+        date.getEditor().clear();
+        txtProgramName.clear();
+        txtProgramFee.clear();
+        txtPayingAmount.clear();
+    }
     private void setPatientId() throws SQLException, ClassNotFoundException {
         ObservableList<String> observableList = FXCollections.observableArrayList();
-        List<PatientDto> patientIds = patientBO.getAllPatients();
-        for (PatientDto patientDto : patientIds) {
-            observableList.add(patientDto.getId());
-        }
+        List<String> patientIds = sessionBO.getPatientIdsFromTherapySessions();
+        observableList.addAll(patientIds);
         cmbPatient.setItems(observableList);
     }
 
@@ -90,6 +95,7 @@ public class PaymentController {
         boolean isPaid = paymentBO.pay(paymentId, payingAmount);
         if (isPaid) {
             new Alert(Alert.AlertType.CONFIRMATION, "Payment successful").show();
+            clear();
         }else {
             new Alert(Alert.AlertType.ERROR, "Payment failed").show();
         }
@@ -114,8 +120,5 @@ public class PaymentController {
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.setTitle("Login Page");
-    }
-
-    public void ReFillAction(ActionEvent actionEvent) {
     }
 }

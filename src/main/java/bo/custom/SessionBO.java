@@ -1,6 +1,7 @@
 package bo.custom;
 
 import bo.SuperBO;
+import dto.PatientDto;
 import dto.PaymentDTO;
 import dto.TherapyProgramHistoryDTO;
 import dto.Therapy_SessionDto;
@@ -26,6 +27,8 @@ public interface SessionBO extends SuperBO {
     Long searchSessionId(String patiendId, String programId);
 
     List<TherapyProgramHistoryDTO> getPatientTherapyHistory(String patientId);
+
+    List<String> getPatientIdsFromTherapySessions();
 
 
 //    boolean updateSession(String sessionDate);

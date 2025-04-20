@@ -43,7 +43,7 @@
         <ComboBox fx:id="cmbPatient" layoutX="120.0" layoutY="113.0" onAction="#patientCmbOnAction" prefHeight="43.0" prefWidth="234.0" promptText="Select Patient" styleClass="combobox" />
         <Button fx:id="btnPay" layoutX="191.0" layoutY="445.0" onAction="#payAction" styleClass="dashboard-button" text="Pay" />
         <Button fx:id="btnClear" layoutX="373.0" layoutY="445.0" onAction="#clearAction" styleClass="dashboard-button" text="Clear" />
-      <ComboBox fx:id="cmbProgram" layoutX="448.0" layoutY="113.0" onAction="#programCmbOnAction" prefHeight="43.0" prefWidth="234.0" promptText="Select Program" styleClass="combobox" />
+        <ComboBox fx:id="cmbProgram" layoutX="448.0" layoutY="113.0" onAction="#programCmbOnAction" prefHeight="43.0" prefWidth="234.0" promptText="Select Program" styleClass="combobox" />
       <Label layoutX="491.0" layoutY="285.0" text="Paying Amount (LKR):" />
       <TextField fx:id="txtPayingAmount" layoutX="492.0" layoutY="322.0" prefWidth="250.0" promptText="Enter Amount" />
 
