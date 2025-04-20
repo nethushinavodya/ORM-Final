@@ -7,6 +7,7 @@ module org.example {
     requires jakarta.persistence;
     requires java.naming;
     requires spring.security.crypto;
+    requires net.sf.jasperreports.core;
 
     opens org.example to javafx.fxml;
     exports org.example;

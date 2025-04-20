@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.InvoiceController">
+    <children>
+        <VBox layoutX="10.0" layoutY="10.0" prefHeight="680.0" prefWidth="480.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <children>
+                <!-- Header Section -->
+                <VBox alignment="CENTER" spacing="5.0">
+                    <children>
+                        <Label prefHeight="35.0" prefWidth="278.0" text="Serenity Therapy Center" textAlignment="CENTER">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label text="OFFICIAL INVOICE" textAlignment="CENTER">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblInvoiceNumber" text="Invoice #: INV-12345" textAlignment="CENTER">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblInvoiceDate" text="Date: 2025-04-20" textAlignment="CENTER">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" top="10.0" />
+                    </padding>
+                </VBox>
+
+                <!-- Separator -->
+                <Separator prefWidth="200.0" />
+
+                <!-- Patient Information Section -->
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="PATIENT INFORMATION" textFill="#0d47a1">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <HBox spacing="10.0">
+                            <children>
+                                <Label text="Patient ID:" textFill="#616161">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblPatientId" text="P001" />
+                            </children>
+                        </HBox>
+                        <HBox spacing="10.0">
+                            <children>
+                                <Label text="Name:" textFill="#616161">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblPatientName" text="John Doe" />
+                            </children>
+                        </HBox>
+                        <HBox spacing="10.0">
+                            <children>
+                                <Label text="Contact:" textFill="#616161">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblPatientContact" text="+94 771234567" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" top="15.0" />
+                    </padding>
+                </VBox>
+
+                <!-- Session Information Section -->
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="SESSION INFORMATION" textFill="#0d47a1">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <HBox spacing="10.0">
+                            <children>
+                                <Label text="Program ID:" textFill="#616161">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblProgramId" text="PRG001" />
+                            </children>
+                        </HBox>
+                        <HBox spacing="10.0">
+                            <children>
+                                <Label text="Program Name:" textFill="#616161">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblProgramName" text="Physical Therapy" />
+                            </children>
+                        </HBox>
+                        <HBox spacing="10.0">
+                            <children>
+                                <Label text="Therapist ID:" textFill="#616161">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblTherapistId" text="T001" />
+                            </children>
+                        </HBox>
+                        <HBox spacing="10.0">
+                            <children>
+                                <Label text="Session Date:" textFill="#616161">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblSessionDate" text="2025-04-20" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" top="10.0" />
+                    </padding>
+                </VBox>
+
+                <!-- Separator -->
+                <Separator prefWidth="200.0" />
+
+                <!-- Payment Details Section -->
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="PAYMENT DETAILS" textFill="#0d47a1">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <HBox spacing="10.0">
+                            <children>
+                                <Label text="Payment Type:" textFill="#616161">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblPaymentType" text="Full Payment" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <children>
+                                <Label minWidth="150.0" text="Program Fee:" textFill="#616161">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblProgramFee" text="Rs. 5000.00" />
+                            </children>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <children>
+                                <Label minWidth="150.0" text="Amount Paid:" textFill="#616161">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblAmountPaid" text="Rs. 3000.00" />
+                            </children>
+                        </HBox>
+                        <Separator prefWidth="200.0">
+                            <VBox.margin>
+                                <Insets bottom="5.0" top="5.0" />
+                            </VBox.margin>
+                        </Separator>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <children>
+                                <Label minWidth="150.0" text="Balance Due:" textFill="#616161">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblBalanceDue" text="Rs. 2000.00" textFill="#d32f2f">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" top="15.0" />
+                    </padding>
+                </VBox>
+
+                <!-- Footer Section -->
+                <VBox alignment="CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Label text="Thank you for choosing our Therapy Center!" textAlignment="CENTER">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label text="For any inquiries, please contact us at: +94 112345678" textAlignment="CENTER">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+
+                <!-- Print Button -->
+                <HBox alignment="CENTER">
+                    <children>
+                        <Button fx:id="btnPrint" mnemonicParsing="false" onAction="#printInvoice" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #2196f3;" text="Print Invoice" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" top="10.0" />
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

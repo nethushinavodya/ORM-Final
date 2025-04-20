@@ -10,12 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JasperPrint;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -37,6 +39,7 @@ public class SessionManagementController {
     public TextField txtProgramfee;
     public TextField txtAmountPaid;
     public ComboBox<String> cmbPayment;
+    public Button btnGenerateInvoice;
 
     SessionBO sessionBO = (SessionBO) BOFactory.getInstance().getBO(BOFactory.BOType.SESSION);
     ProgramBO programBO = (ProgramBO) BOFactory.getInstance().getBO(BOFactory.BOType.PROGRAM);
@@ -200,5 +203,46 @@ public class SessionManagementController {
         txtPatientName.setText(patient.getName());
         txtPatientContact.setText(patient.getTel());
 
+    }
+
+    public void generateInvoice(ActionEvent actionEvent) {
+        try {
+            if (cmbPatientID.getValue() == null || cmbProgramID.getValue() == null ||
+                    dateSession.getValue() == null || txtAmountPaid.getText().isEmpty()) {
+                new Alert(Alert.AlertType.ERROR, "Please complete all required fields").show();
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Invoice.fxml"));
+            Parent root = loader.load();
+
+            InvoiceController invoiceController = loader.getController();
+
+            invoiceController.setInvoiceData(
+                    cmbPatientID.getValue(),
+                    txtPatientName.getText(),
+                    txtPatientContact.getText(),
+                    cmbProgramID.getValue(),
+                    txtProgramName.getText(),
+                    cmbTherapistID.getValue(),
+                    dateSession.getValue().toString(),
+                    txtProgramfee.getText(),
+                    txtAmountPaid.getText(),
+                    cmbPayment.getValue()
+            );
+
+            Stage invoiceStage = new Stage();
+            Scene scene = new Scene(root);
+            invoiceStage.setScene(scene);
+            invoiceStage.setTitle("Therapy Session Invoice");
+
+            invoiceController.setPrintAction(invoiceStage);
+
+            invoiceStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to generate invoice: " + e.getMessage()).show();
+        }
     }
 }
