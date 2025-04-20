@@ -61,6 +61,7 @@ public class TherapistManagementController {
         txtName.clear();
         txtSpecialization.clear();
         txtContactInfo.clear();
+        therapyProgramCmb.setValue(null);
     }
     public void getAllTherapists() throws SQLException, ClassNotFoundException {
         ObservableList<TherapistDto> therapistDtos = therapistBO.getAllTherapists();
@@ -88,9 +89,11 @@ public class TherapistManagementController {
         if (programId == null){
             therapistDTO = new TherapistDto(therapistId,name,specialization,contactInfo,"Available");
             getAllTherapists();
+            clear();
         }else {
             therapistDTO = new TherapistDto(therapistId,name,specialization,contactInfo,"Not Available");
             getAllTherapists();
+            clear();
         }
         therapistBO.addTherapist(therapistDTO, programId);
         getAllTherapists();

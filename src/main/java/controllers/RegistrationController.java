@@ -20,7 +20,6 @@ public class RegistrationController {
     public PasswordField txtPassword;
     public Button btnRegister;
     public Button backbit;
-    public ComboBox cmbRole;
 
     UserBO userBO = (UserBO) BOFactory.getInstance().getBO(BOFactory.BOType.USER);
 

@@ -60,13 +60,13 @@ public class PatientManagementController {
         txtPatientTel.clear();
     }
     private void checkrole(UserDto userDto) {
-        System.out.println(userDto.getRole());
+        /*System.out.println(userDto.getRole());
 
         if (userDto.getRole().equals("admin")){
             btnAddPatient.setDisable(true);
             btnDeletePatient.setDisable(true);
             btnUpdatePatient.setDisable(true);
-        }
+        }*/
     }
 
     public void setcellvaluefactory(){

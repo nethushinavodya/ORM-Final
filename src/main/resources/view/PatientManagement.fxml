@@ -20,7 +20,7 @@
         <GridPane alignment="TOP_LEFT" hgap="15" layoutX="65.0" layoutY="100.0" vgap="10">
             <!-- Row 1 -->
             <Label text="ID:" />
-            <TextField fx:id="txtPatientID" onKeyReleased="#PatientIdOnreleasedOnAction" prefWidth="250.0" promptText="Enter Student ID" GridPane.columnIndex="1" />
+            <TextField fx:id="txtPatientID" onKeyReleased="#PatientIdOnreleasedOnAction" prefWidth="250.0" promptText="Enter Patient ID" GridPane.columnIndex="1" />
 
             <!-- Row 2 -->
             <Label text="Name:" GridPane.rowIndex="1" />
