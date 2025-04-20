@@ -69,6 +69,8 @@ public class SessionManagementController {
         txtProgramfee.clear();
         txtProgramName.clear();
         dateSession.setValue(null);
+        cmbTherapistID.getSelectionModel().clearSelection();
+        txtAmountPaid.clear();
     }
 
     public void setCmbPatientID() throws SQLException, ClassNotFoundException {
