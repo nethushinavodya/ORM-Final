@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -10,69 +11,88 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="648.0" prefWidth="872.0" styleClass="dark-mode-pane" stylesheets="@css/login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginFormController">
     <children>
-            <ImageView fitHeight="649.0" fitWidth="459.0" layoutX="-21.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@images/serenity-therapy-image.png" />
-                </image>
-            </ImageView>
+        <ImageView fitHeight="649.0" fitWidth="459.0" layoutX="-21.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/serenity-therapy-image.png" />
+            </image>
+        </ImageView>
 
-          <!-- Right side with login form -->
-          <VBox alignment="CENTER" layoutX="411.0" layoutY="1.0" prefHeight="648.0" prefWidth="461.0" spacing="20.0" styleClass="login-form-container">
-              <children>
-                  <ImageView fitHeight="127.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                          <Image url="@images/serenity-therapy-logo.png" />
-                      </image>
-                  </ImageView>
-                  <Label prefHeight="60.0" prefWidth="210.0" styleClass="login-title" text="Login">
-                      <VBox.margin>
-                          <Insets bottom="20.0" />
-                      </VBox.margin>
-                  </Label>
-                  <TextField fx:id="txtUsername" maxWidth="350.0" prefHeight="50.0" prefWidth="350.0" promptText="Username" styleClass="login-field">
-                      <VBox.margin>
-                          <Insets left="20.0" right="20.0" />
-                      </VBox.margin>
-                  </TextField>
-                  <PasswordField fx:id="txtPassword" maxWidth="350.0" prefHeight="50.0" prefWidth="350.0" promptText="Password" styleClass="login-field">
-                      <VBox.margin>
-                          <Insets left="20.0" right="20.0" />
-                      </VBox.margin>
-                  </PasswordField>
-                  <Button fx:id="btnLogin" maxWidth="350.0" mnemonicParsing="false" onAction="#loginOnAction" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" text="Login">
-                      <VBox.margin>
-                          <Insets left="20.0" right="20.0" top="10.0" />
-                      </VBox.margin>
-                  </Button>
-                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="527.0">
-                      <children>
-                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account? " />
-                          <Hyperlink fx:id="registerLink" onAction="#registrationOnAction" styleClass="register-link" text="Register" />
-                      </children>
-                  </HBox>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="footer-text" text="Serenity Mental Health Therapy Center">
-                      <font>
-                          <Font name="System Bold" size="12.0" />
-                      </font>
-                      <VBox.margin>
-                          <Insets top="60.0" />
-                      </VBox.margin>
-                  </Text>
-              </children>
-              <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-              </padding>
-          </VBox>
-            <Text fill="WHITE" layoutX="65.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="image-overlay-text" text="Welcome to Serenity" wrappingWidth="313.0062255859375">
-                <font>
-                    <Font name="System Bold" size="36.0" />
-                </font>
-            </Text>
+        <!-- Right side with login form -->
+        <VBox alignment="CENTER" layoutX="411.0" layoutY="1.0" prefHeight="648.0" prefWidth="461.0" spacing="20.0" styleClass="login-form-container">
+            <children>
+                <ImageView fitHeight="127.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/serenity-therapy-logo.png" />
+                    </image>
+                </ImageView>
+                <Label prefHeight="60.0" prefWidth="210.0" styleClass="login-title" text="Login">
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin>
+                </Label>
+                <TextField fx:id="txtUsername" maxWidth="350.0" prefHeight="50.0" prefWidth="350.0" promptText="Username" styleClass="login-field">
+                    <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                    </VBox.margin>
+                </TextField>
+
+                <!-- Password field container with toggle button -->
+                <StackPane maxWidth="350.0" prefWidth="350.0">
+                    <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                    </VBox.margin>
+                    <!-- Password field (hidden by default) -->
+                    <PasswordField fx:id="txtPassword" maxWidth="350.0" prefHeight="50.0" prefWidth="350.0" promptText="Password" styleClass="login-field" />
+
+                       <!-- Visible text field (initially hidden) -->
+                    <TextField fx:id="txtPasswordVisible" maxWidth="350.0" prefHeight="50.0" prefWidth="350.0" promptText="Password" styleClass="login-field" visible="false" />
+
+                       <!-- Eye icon button to toggle password visibility -->
+                    <Button fx:id="btnTogglePassword" mnemonicParsing="false" onAction="#togglePasswordVisibility" prefHeight="40.0" prefWidth="84.0" styleClass="password-toggle-button" text="🙈">
+                        <StackPane.margin>
+                            <Insets right="10.0" />
+                        </StackPane.margin>
+                        <StackPane.alignment>
+                            <javafx.geometry.Pos fx:constant="CENTER_RIGHT" />
+                        </StackPane.alignment>
+                    </Button>
+                </StackPane>
+
+                <Button fx:id="btnLogin" maxWidth="350.0" mnemonicParsing="false" onAction="#loginOnAction" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" text="Login">
+                    <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="10.0" />
+                    </VBox.margin>
+                </Button>
+                <HBox alignment="CENTER" prefHeight="30.0" prefWidth="527.0">
+                    <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account? " />
+                        <Hyperlink fx:id="registerLink" onAction="#registrationOnAction" styleClass="register-link" text="Register" />
+                    </children>
+                </HBox>
+                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="footer-text" text="Serenity Mental Health Therapy Center">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="60.0" />
+                    </VBox.margin>
+                </Text>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+        <Text fill="WHITE" layoutX="65.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="image-overlay-text" text="Welcome to Serenity" wrappingWidth="313.0062255859375">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Text>
     </children>
 </AnchorPane>

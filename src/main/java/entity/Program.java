@@ -1,9 +1,6 @@
 package entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +20,7 @@ public class Program {
     private String duration;
     private String fee;
 
-    @OneToMany(mappedBy = "program")
+    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
     private List<Therapist_Program> therapist_programs;
 
     public Program(String programId, String name, String duration, String fee) {
@@ -33,7 +30,7 @@ public class Program {
         this.fee = fee;
     }
 
-    @OneToMany(mappedBy = "programs")
+    @OneToMany(mappedBy = "programs", cascade = CascadeType.ALL)
     private List<Therapy_Session> therapy_sessions;
 
 

@@ -82,30 +82,34 @@ public class PatientManagementController {
         tblPatients.setItems(patientDtos);
     }
 
-    public void addPatient(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+    public void addPatient(ActionEvent actionEvent) {
         String id = txtPatientID.getText();
         String name = txtPatientName.getText();
         String email = txtPatientEmail.getText();
         String address = txtPatientAddress.getText();
         String tel = txtPatientTel.getText();
         String registerDate = regDate.getValue().toString();
-
-        if (isValid()) {
+        
+        if (!isValid()) {
+            new Alert(Alert.AlertType.ERROR,"Please input valid data").show();
+        }else if (isValid()){
             PatientDto patientDto = new PatientDto(id,name,email,address,tel,registerDate);
-            boolean isSaved = patientBO.addPatient(patientDto , userDto);
-            if (isSaved){
-                new Alert(Alert.AlertType.CONFIRMATION,"Patient Saved");
-                getallPatient();
-                clear();
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Patient Not Saved");
+            try {
+                boolean isSaved = patientBO.addPatient(patientDto , userDto);
+                if (isSaved){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Patient Saved").show();
+                    getallPatient();
+                    clear();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Patient Not Saved").show();
+                }
+            } catch (SQLException | ClassNotFoundException e) {
+                new Alert(Alert.AlertType.ERROR,"Error occurred while saving patient").show();
             }
-        }else {
-            new Alert(Alert.AlertType.ERROR,"Please input valid data");
         }
     }
 
-    public void updatePatient(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+    public void updatePatient(ActionEvent actionEvent) {
         String id = txtPatientID.getText();
         String name = txtPatientName.getText();
         String email = txtPatientEmail.getText();
@@ -115,29 +119,37 @@ public class PatientManagementController {
 
         if (isValid()){
             PatientDto patientDto = new PatientDto(id,name,email,address,tel,registerDate);
-            boolean isUpdate = patientBO.updatePatient(patientDto);
-            if (isUpdate){
-                new Alert(Alert.AlertType.INFORMATION,"Update successful");
-                getallPatient();
-                clear();
-            }else {
-                new Alert(Alert.AlertType.ERROR,"Update failed");
+            try {
+                boolean isUpdate = patientBO.updatePatient(patientDto);
+                if (isUpdate){
+                    new Alert(Alert.AlertType.INFORMATION,"Update successful").show();
+                    getallPatient();
+                    clear();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Update failed").show();
+                }
+            } catch (SQLException | ClassNotFoundException e) {
+                new Alert(Alert.AlertType.ERROR,"Error occurred while updating patient").show();
             }
         }else {
-            new Alert(Alert.AlertType.ERROR,"Please input valid data");
+            new Alert(Alert.AlertType.ERROR,"Please input valid data").show();
         }
     }
 
-    public void deletePatient(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+    public void deletePatient(ActionEvent actionEvent) {
         String id = txtPatientID.getText();
 
-        boolean isDelete = patientBO.deletePatient(id);
-        if (isDelete){
-            new Alert(Alert.AlertType.INFORMATION,"Delete successful");
-            getallPatient();
-            clear();
-        }else {
-            new Alert(Alert.AlertType.ERROR,"Delete failed");
+        try {
+            boolean isDelete = patientBO.deletePatient(id);
+            if (isDelete){
+                new Alert(Alert.AlertType.CONFIRMATION,"Delete successful").show();
+                getallPatient();
+                clear();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Delete failed").show();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,"Error occurred while deleting patient").show();
         }
 
     }
@@ -145,15 +157,19 @@ public class PatientManagementController {
     public void searchPatient(ActionEvent actionEvent) {
         String id = txtPatientID.getText();
 
-        PatientDto patientDto = patientBO.searchPatient(id);
-        if (patientDto != null){
-            txtPatientName.setText(patientDto.getName());
-            txtPatientEmail.setText(patientDto.getEmail());
-            txtPatientAddress.setText(patientDto.getAddress());
-            txtPatientTel.setText(patientDto.getTel());
-            regDate.setValue(LocalDate.parse(patientDto.getRegisterDate()));
-        }else {
-            new Alert(Alert.AlertType.ERROR,"Patient not found");
+        try {
+            PatientDto patientDto = patientBO.searchPatient(id);
+            if (patientDto != null){
+                txtPatientName.setText(patientDto.getName());
+                txtPatientEmail.setText(patientDto.getEmail());
+                txtPatientAddress.setText(patientDto.getAddress());
+                txtPatientTel.setText(patientDto.getTel());
+                regDate.setValue(LocalDate.parse(patientDto.getRegisterDate()));
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Patient not found").show();
+            }
+        } catch (Exception  e) {
+            new Alert(Alert.AlertType.ERROR,"Error occurred while searching patient").show();
         }
     }
 

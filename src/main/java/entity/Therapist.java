@@ -20,7 +20,7 @@ public class Therapist {
     private String status;
 
     @OneToMany(mappedBy = "therapist")
-    private List<Therapist_Program> therapist_programs; // Add this field for many-to-many relationship with Therapist_Program entity>
+    private List<Therapist_Program> therapist_programs;
 
     public Therapist(String therapistId, String name, String specialization, String contactNo, String status) {
         this.therapistId = therapistId;

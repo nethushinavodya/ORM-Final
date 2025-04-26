@@ -20,14 +20,25 @@ public class LoginFormController {
     public PasswordField txtPassword;
     public Button btnLogin;
     public Hyperlink registerLink;
+    public Button btnTogglePassword;
+    public TextField txtPasswordVisible;
 
     UserBO userBO = (UserBO) BOFactory.getInstance().getBO(BOFactory.BOType.USER);
     UserDAO userDAO = (UserDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.USER);
 
     static UserDto userDto ;
+    public void initialize() {
+        txtPassword.textProperty().addListener((observable, oldValue, newValue) -> {
+            txtPasswordVisible.setText(newValue);
+        });
+
+        txtPasswordVisible.textProperty().addListener((observable, oldValue, newValue) -> {
+            txtPassword.setText(newValue);
+        });
+    }
     public void loginOnAction(ActionEvent actionEvent) throws IOException {
         String username = txtUsername.getText();
-        String password = txtPassword.getText();
+        String password = txtPassword.isVisible() ? txtPassword.getText() : txtPasswordVisible.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Please fill in both username and password.").show();
@@ -76,5 +87,19 @@ public class LoginFormController {
     }
     static UserDto getUserDto() {
         return userDto;
+    }
+
+    public void togglePasswordVisibility(ActionEvent actionEvent) {
+        if (txtPassword.isVisible()) {
+            txtPasswordVisible.setText(txtPassword.getText());
+            txtPassword.setVisible(false);
+            txtPasswordVisible.setVisible(true);
+            btnTogglePassword.setText("👀");
+        } else {
+            txtPassword.setText(txtPasswordVisible.getText());
+            txtPasswordVisible.setVisible(false);
+            txtPassword.setVisible(true);
+            btnTogglePassword.setText("🙈");
+        }
     }
 }
